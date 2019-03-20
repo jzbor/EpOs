@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EpOs</string>
+    <string name="navigation_drawer_open">Menü öffnen</string>
+    <string name="navigation_drawer_close">Menü schließen</string>
+    <string name="nav_name">Name</string>
+    <string name="nav_class">Klasse</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="not_available_long">Nicht verfügbar</string>
+    <string name="substitutions_date_default">Kein Plan verfügbar</string>
+    <string name="substitutions_substitutions_default">Keine Vertretungen verfügbar</string>
+    <string name="nav_substitutions">Vertretungen</string>
+    <string name="nav_scedule">Stundenplan</string>
+    <string name="nav_settings">Einstellungen</string>
+    <string name="tab_text_1">MO</string>
+    <string name="tab_text_2">DI</string>
+    <string name="tab_text_3">MI</string>
+    <string name="tab_text_4">DO</string>
+    <string name="tab_text_5">FR</string>
+    <string name="title_activity_schedule">Stundenplan</string>
+    <string name="nav_dev">Test</string>
+    <string name="prompt_password">Passwort</string>
+    <string name="action_sign_in">Einloggen</string>
+    <string name="error_invalid_email">Diese Email-Andresse ist ungültig</string>
+    <string name="error_invalid_password">Das Passwort ist zu kurz</string>
+    <string name="error_incorrect_password">Falsches Passwort</string>
+    <string name="error_field_required">Benötigtes Feld</string>
+    <string name="add_widget">Widget hinzufügen</string>
+    <string name="promt_school">Schule</string>
+    <string name="error_missing_login">Bitte einloggen</string>
+    <string name="update_failed">Update fehlgeschlagen</string>
+    <string name="update_succeeded">Update erfolgreich</string>
+    <string name="error_incorrect_school">Schule nicht verfügbar</string>
+    <string name="title_activity_info">Info</string>
+    <string name="nav_copy">Kopieren</string>
+    <string name="copied_to_clipboard">In Ablage kopiert</string>
+</resources>

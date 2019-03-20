@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.SubstitutionFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/date0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:text="@string/substitutions_date_default"
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance.Material.Headline"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/substitutions0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/date0">
+
+        </FrameLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/substitutions0"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/primaryColor" />
+
+        <TextView
+            android:id="@+id/date1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider"
+            android:text="@string/substitutions_date_default"
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance.Material.Headline"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/substitutions1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/date1">
+
+        </FrameLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_below="@id/substitutions1" />
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

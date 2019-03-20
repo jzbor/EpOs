@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:stretchColumns="1">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="1"
+            android:gravity="start"
+            android:text="@string/not_available_long"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/item_calendar" />
+
+        <TextView
+            android:id="@+id/subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:singleLine="true"
+            android:text="@string/not_available_long"
+            android:textSize="@dimen/item_calendar" />
+
+    </TableRow>
+
+</TableLayout>

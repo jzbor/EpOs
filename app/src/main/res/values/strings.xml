@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">EpOs</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_name">Name</string>
+    <string name="nav_class">Class</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="not_available_long">not available</string>
+    <string name="substitutions_date_default">data not available</string>
+    <string name="substitutions_substitutions_default">no subplan available</string>
+    <string name="nav_scedule">Schedule</string>
+    <string name="nav_settings">Settings</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="tab_text_1">MON</string>
+    <string name="tab_text_2">TUE</string>
+    <string name="tab_text_3">WED</string>
+    <string name="tab_text_4">THU</string>
+    <string name="tab_text_5">FRI</string>
+    <string name="title_activity_schedule">Schedule</string>
+    <string name="nav_login">Login</string>
+    <string name="nav_dev">Dev</string>
+    <string name="title_activity_login">Login</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">Invalid mail address</string>
+    <string name="error_invalid_password">Password too short</string>
+    <string name="error_incorrect_password">Incorrect password</string>
+    <string name="error_field_required">Field required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="job_name">EpOs Update</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="promt_school">Shool</string>
+    <string name="not_available_short">N/A</string>
+    <string name="nav_substitutions">Substitutions</string>
+    <string name="action_sign_in">Log in</string>
+    <string name="error_incorrect_school">School not available</string>
+    <string name="error_missing_login">Not logged in</string>
+    <string name="default_school">hugyvat</string>
+    <string name="update_failed">Update failed</string>
+    <string name="update_succeeded">Successful update</string>
+    <string name="filename_personal">pers.sa</string>
+    <string name="filename_subplan_0">subcache0.sd</string>
+    <string name="filename_subplan_1">subcache1.sd</string>
+    <string name="filename_schedule">sccache.sc</string>
+    <string name="filename_login">login.sa</string>
+    <string name="title_activity_info">Informations</string>
+    <string name="nav_info">Info (Alpha only)</string>
+    <string name="url_web_info">http://jzbor.ddns.net:8080/epos</string>
+    <string name="nav_copy">Copy</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="filename_dates">dates.dts</string>
+    <string name="nav_calendar">Calendar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_next_default"></string>
+</resources>

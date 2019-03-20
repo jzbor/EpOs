@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:text="@string/not_available_short"
+        android:textAlignment="center"
+        android:textSize="@dimen/item_text_big" />
+
+    <TextView
+        android:id="@+id/subject"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingStart="5dp"
+        android:text="@string/not_available_long"
+        android:textAlignment="center"
+        android:textSize="@dimen/item_text_big" />
+
+    <TextView
+        android:id="@+id/room"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingStart="5dp"
+        android:text="@string/not_available_short"
+        android:textAlignment="center"
+        android:textSize="@dimen/item_text_big" />
+
+    <TextView
+        android:id="@+id/teacher"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingStart="5dp"
+        android:text="@string/not_available_short"
+        android:textAlignment="center"
+        android:textSize="@dimen/item_text_big" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingStart="5dp"
+        android:text="@string/not_available_short"
+        android:textAlignment="center"
+        android:textSize="@dimen/item_text_big" />
+
+</LinearLayout>
