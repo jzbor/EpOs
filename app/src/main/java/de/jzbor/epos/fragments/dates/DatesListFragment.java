@@ -41,7 +41,7 @@ public class DatesListFragment extends UpdatableFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_subplan_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_dates_list, container, false);
 
         if (getArguments() != null && !getArguments().isEmpty()) {
             dates = (Dates) getArguments().getSerializable(ARG_DATES);
