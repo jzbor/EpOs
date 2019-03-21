@@ -9,10 +9,11 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Dates implements Serializable {
 
@@ -20,7 +21,7 @@ public class Dates implements Serializable {
     private Map<String, String> dates;
 
     public Dates(String html) {
-        dates = new HashMap<>();
+        dates = new TreeMap<>(new DateComparator());
         parse(html);
     }
 
@@ -40,7 +41,6 @@ public class Dates implements Serializable {
         Elements trElements = tbodyElement.children();
         for (Element e :
                 trElements) {
-            System.out.println(e.children().size());
             if (e.children().size() == 3) {
                 String date = e.child(0).text();
                 String subject = e.child(2).text();
@@ -54,7 +54,7 @@ public class Dates implements Serializable {
     }
 
     public Map<String, String> getDatesAfter(Date date){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new TreeMap<>(new DateComparator());
         for (String key :
                 dates.keySet()) {
             Date compareDate = stringToDate(key);
@@ -74,5 +74,18 @@ public class Dates implements Serializable {
             sb.append("\t" + key + ": " + dates.get(key) + "\n");
         }
         return sb.toString();
+    }
+
+    private class DateComparator implements Comparator<String>, Serializable {
+        @Override
+        public int compare(String s, String t1) {
+            Date d1 = stringToDate(s);
+            Date d2 = stringToDate(t1);
+            if (!(d1 == null || d2 == null)) {
+                return d1.compareTo(d2);
+            } else {
+                return 0;
+            }
+        }
     }
 }
