@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.DownloadListener;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -49,6 +50,7 @@ public class InfoActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         WebView browser = findViewById(R.id.web_view);
+        browser.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         browser.setWebViewClient(new MyBrowser(this));
         NetworkInfo networkInfo = ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         if (!((networkInfo == null) || (!networkInfo.isConnectedOrConnecting()))) {
