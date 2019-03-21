@@ -58,7 +58,7 @@ public class DatesListFragment extends UpdatableFragment {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        };
+        }
 
         // Set the adapter
         // Should always be true
@@ -100,10 +100,12 @@ public class DatesListFragment extends UpdatableFragment {
 
     @Override
     public void loadCache() throws IOException, ClassNotFoundException {
+        System.out.println("Load cache");
         dates = (Dates) App.openObject(getActivity().getApplicationContext().getCacheDir(), getString(R.string.filename_dates));
         if (recyclerView != null) {
             recyclerView.setAdapter(new MyDatesRecyclerViewAdapter(dates));
         }
+        System.out.println("\tEnd load cache");
     }
 
     /**
