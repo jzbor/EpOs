@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import de.jzbor.epos.activities.InfoActivity;
 import de.jzbor.epos.activities.LoginActivity;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.elternportal.Dates;
+import de.jzbor.epos.activities.ToDoActivity;
 import de.jzbor.epos.fragments.ScheduleSuperFragment;
 import de.jzbor.epos.fragments.SubstitutionFragment;
 import de.jzbor.epos.fragments.dates.DatesListFragment;
@@ -47,6 +47,9 @@ public class NavListener implements NavigationView.OnNavigationItemSelectedListe
             activity.replaceFragment(new ScheduleSuperFragment());
         } else if (id == R.id.nav_calendar) {
             activity.replaceFragment(new DatesListFragment());
+        } else if (id == R.id.nav_todo) {
+            Intent i = new Intent(activity, ToDoActivity.class);
+            activity.startActivity(i);
         } else if (id == R.id.nav_login) {
             Intent i = new Intent(activity, LoginActivity.class);
             activity.startActivity(i);

@@ -18,6 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activities.ToDoActivity"
+            android:label="@string/title_activity_to_do"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.jzbor.epos.activities.MainActivity" />
+        </activity>
+        <activity
             android:name=".activities.InfoActivity"
             android:label="@string/title_activity_info"
             android:parentActivityName=".activities.MainActivity"
@@ -32,6 +41,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
+
                 <!-- @TODO Customize intent filter -->
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
