@@ -44,10 +44,11 @@
     <string name="update_failed">Update failed</string>
     <string name="update_succeeded">Successful update</string>
     <string name="filename_personal">pers.sa</string>
-    <string name="filename_subplan_0">subcache0.sd</string>
+    <!--<string name="filename_subplan_0">subcache0.sd</string>-->
     <string name="filename_subplan_1">subcache1.sd</string>
     <string name="filename_schedule">sccache.sc</string>
     <string name="filename_login">login.sa</string>
+    <string name="filename_subplan">subplan.sp</string>
     <string name="title_activity_info">Informations</string>
     <string name="nav_info">Info (Alpha only)</string>
     <string name="url_web_info">http://jzbor.ddns.net:8080/epos</string>

@@ -13,6 +13,7 @@ import de.jzbor.epos.elternportal.ElternPortal;
 import de.jzbor.epos.elternportal.ImplicitLoginException;
 import de.jzbor.epos.elternportal.ParserException;
 import de.jzbor.epos.elternportal.Schedule;
+import de.jzbor.epos.elternportal.Subplan;
 import de.jzbor.epos.elternportal.SubstitutePlanParser;
 
 public class ComThread extends Thread {
@@ -63,7 +64,7 @@ public class ComThread extends Thread {
                 switch (request) {
                     case WEB_SUBDIR_SUBPLAN: {
                         responseType = UniHandler.EP_RESPONSE_SUBPLAN;
-                        returnObject = SubstitutePlanParser.getSubstitutions(responseString);
+                        returnObject = new Subplan(responseString);
                         break;
                     }
                     case WEB_SUBDIR_SCHEDULE: {

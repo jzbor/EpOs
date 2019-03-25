@@ -5,25 +5,17 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
-
-import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.elternportal.ElternPortal;
-import de.jzbor.epos.elternportal.SubstituteDay;
+import de.jzbor.epos.elternportal.Subplan;
 import de.jzbor.epos.fragments.subplan.SubplanListFragment;
 import de.jzbor.epos.threading.ComThread;
 import de.jzbor.epos.threading.UniHandler;
-
-import static android.content.ContentValues.TAG;
 
 public class SubstitutionFragment extends UpdatableFragment {
 
@@ -51,27 +43,21 @@ public class SubstitutionFragment extends UpdatableFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        try {
-            loadCache();
-        } catch (IOException | ClassNotFoundException e) {
-            Log.i(TAG, "onActivityCreated: Unable to load cache");
-            if (ElternPortal.getInstance().loggedIn()) {
-                doUpdate();
-            } else {
-                Toast.makeText(this.getContext(), getString(R.string.error_missing_login), Toast.LENGTH_SHORT).show();
-            }
-        }
+        loadCache();
     }
 
-    public void loadCache() throws IOException, ClassNotFoundException {
-        SubstituteDay sd0 = ((SubstituteDay) App.openObject(getActivity().getApplicationContext().getCacheDir(), getString(R.string.filename_subplan_0)));
-        SubstituteDay sd1 = ((SubstituteDay) App.openObject(getActivity().getApplicationContext().getCacheDir(), getString(R.string.filename_subplan_1)));
-        SubplanListFragment slf0 = SubplanListFragment.newInstance(sd0);
-        SubplanListFragment slf1 = SubplanListFragment.newInstance(sd1);
+    public void loadCache() {
+        Subplan subplan = Subplan.load(getActivity().getApplicationContext().getCacheDir(), getString(R.string.filename_subplan));
+        // @TODO better exception handling
+        if (subplan == null)
+            return;
+        SubplanListFragment slf0 = SubplanListFragment.newInstance(subplan.getSubstituteDay(0));
+        SubplanListFragment slf1 = SubplanListFragment.newInstance(subplan.getSubstituteDay(1));
         setListFragment(slf0, 0);
         setListFragment(slf1, 1);
-        ((TextView) getView().findViewById(R.id.date0)).setText(sd0.getDate());
-        ((TextView) getView().findViewById(R.id.date1)).setText(sd1.getDate());
+        ((TextView) getView().findViewById(R.id.date0)).setText(subplan.getSubstituteDay(0).getDate());
+        ((TextView) getView().findViewById(R.id.date1)).setText(subplan.getSubstituteDay(1).getDate());
+        ((TextView) getView().findViewById(R.id.timestampView)).setText(subplan.getTimestamp());
     }
 
     @Override

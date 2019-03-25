@@ -58,10 +58,41 @@
 
         </FrameLayout>
 
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/substitutions1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/primaryColor" />
+
+        <TextView
+            android:id="@+id/timestampView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider2"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textStyle="italic" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/timestampView"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/primaryColor" />
+
         <Space
             android:layout_width="wrap_content"
             android:layout_height="10dp"
-            android:layout_below="@id/substitutions1" />
+            android:layout_below="@id/divider2" />
 
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

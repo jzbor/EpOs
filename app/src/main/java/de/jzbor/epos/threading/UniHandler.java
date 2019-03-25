@@ -11,7 +11,7 @@ import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
 import de.jzbor.epos.elternportal.Dates;
 import de.jzbor.epos.elternportal.Schedule;
-import de.jzbor.epos.elternportal.SubstituteDay;
+import de.jzbor.epos.elternportal.Subplan;
 
 public class UniHandler extends Handler {
 
@@ -42,14 +42,12 @@ public class UniHandler extends Handler {
                 break;
             }
             case EP_RESPONSE_SUBPLAN: {
-                SubstituteDay[] sds = (SubstituteDay[]) (((Object[]) msg.obj)[0]);
-                try {
-                    App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_subplan_0), sds[0]);
-                    App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_subplan_1), sds[1]);
+                Subplan subplan = (Subplan) (((Object[]) msg.obj)[0]);
+                boolean saved = subplan.save(activity.getApplicationContext().getCacheDir(),
+                        activity.getString(R.string.filename_subplan));
+                if (saved)
                     activity.onUpdateSucceeded();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                // Missing else? onUpdateFailure?
                 break;
             }
             case EP_RESPONSE_SCHEDULE: {
