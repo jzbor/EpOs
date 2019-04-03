@@ -281,6 +281,7 @@ public class Schedule implements Serializable {
         }
         if (day < 0) {
             day = 0;
+            nextLesson = 0;
         }
         Log.d(TAG, "nextLesson: day: " + day + " lesson: " + nextLesson);
         while (!getDay(day)[nextLesson].matches(".*[a-zA-Z]+.*")) {

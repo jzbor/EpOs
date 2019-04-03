@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EpOs</string>
     <string name="navigation_drawer_open">Menü öffnen</string>
     <string name="navigation_drawer_close">Menü schließen</string>
     <string name="nav_name">Name</string>
@@ -34,4 +33,6 @@
     <string name="title_activity_info">Info</string>
     <string name="nav_copy">Kopieren</string>
     <string name="copied_to_clipboard">In Ablage kopiert</string>
+    <string name="nav_calendar">Kalendar</string>
+    <string name="nav_news">Schwarzes Brett</string>
 </resources>
