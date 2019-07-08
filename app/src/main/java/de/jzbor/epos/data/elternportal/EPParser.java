@@ -5,11 +5,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 import de.jzbor.epos.data.Calendar;
+import de.jzbor.epos.data.Notification;
+import de.jzbor.epos.data.Notifications;
 import de.jzbor.epos.data.Schedule;
 import de.jzbor.epos.data.Subplan;
 import de.jzbor.epos.data.SubstituteDay;
@@ -124,5 +127,28 @@ public class EPParser {
         Element superdiv = document.getElementsByClass("main_center").first();
         Element dateElement = superdiv.child(4); // Pretty crappy solution
         return dateElement.text();
+    }
+
+    public static Notifications parseNotifications(String html) {
+        Document document = Jsoup.parse(html);
+        Element contentDiv = document.getElementById("asam_content");
+        Elements listDaily = contentDiv.child(2).children();
+        Elements listArchive = contentDiv.getElementsByClass("collapse");
+        ArrayList<Notification> notifications = new ArrayList<>();
+        for (Element entry :
+                listDaily) {
+            Element textElement = entry.child(0).child(0).child(0);
+            String title = textElement.child(1).text();
+            String content = textElement.child(2).text();
+            notifications.add(new Notification(title, content));
+        }
+        for (Element entry :
+                listArchive) {
+            Element textElement = entry.child(0).child(0);
+            String title = textElement.child(0).child(1).text();
+            String content = textElement.child(1).text();
+            notifications.add(new Notification(title, content));
+        }
+        return new Notifications(notifications);
     }
 }

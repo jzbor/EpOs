@@ -18,6 +18,7 @@ public class EPThread extends Thread {
     public static final String WEB_SUBDIR_SUBPLAN = "service/vertretungsplan";
     public static final String WEB_SUBDIR_SCHEDULE = "service/stundenplan";
     public static final String WEB_SUBDIR_DATES = "service/termine/liste";
+    public static final String WEB_SUBDIR_NOTIFICATIONS = "aktuelles/schwarzes_brett";
     private static final String TAG = "EPThread";
     private ConnectivityManager connectivityManager;
     private DataHandler handler;
@@ -76,6 +77,11 @@ public class EPThread extends Thread {
                         responseType = UniHandler.RESPONSE_DATES;
                         returnObject = EPParser.parseCalendar(responseString);
                         System.out.println(returnObject);
+                        break;
+                    }
+                    case WEB_SUBDIR_NOTIFICATIONS: {
+                        responseType = UniHandler.RESPONSE_NOTIFICATIONS;
+                        returnObject = EPParser.parseNotifications(responseString);
                         break;
                     }
                     case "personal": {

@@ -46,6 +46,9 @@ public class EPProvider implements DataProvider {
 
     @Override
     public int requestNotifications(DataHandler handler) {
-        return UUID.randomUUID().hashCode();
+        int id = UUID.randomUUID().hashCode();
+        EPThread et = new EPThread(connectivityManager, handler, id);
+        et.start(EPThread.WEB_SUBDIR_NOTIFICATIONS);
+        return id;
     }
 }
