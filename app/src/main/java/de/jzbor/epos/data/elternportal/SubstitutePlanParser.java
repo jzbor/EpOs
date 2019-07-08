@@ -8,6 +8,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.jzbor.epos.data.SubstituteDay;
+
 public class SubstitutePlanParser {
     private static final String URL = "service/vertretungsplan";
     private static final String NO_SUBS = "Keine Vertretungen";

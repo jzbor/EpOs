@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.elternportal.Schedule;
+import de.jzbor.epos.data.Schedule;
 
 public class MyScheduleRecyclerViewAdapter extends RecyclerView.Adapter<MyScheduleRecyclerViewAdapter.ViewHolder> {
 

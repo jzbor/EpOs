@@ -9,10 +9,10 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
+import de.jzbor.epos.data.Calendar;
 import de.jzbor.epos.data.DataHandler;
-import de.jzbor.epos.data.elternportal.Calendar;
-import de.jzbor.epos.data.elternportal.Schedule;
-import de.jzbor.epos.data.elternportal.Subplan;
+import de.jzbor.epos.data.Schedule;
+import de.jzbor.epos.data.Subplan;
 
 public class UniHandler extends Handler implements DataHandler {
 

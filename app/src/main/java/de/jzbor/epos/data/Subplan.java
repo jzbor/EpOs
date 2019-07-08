@@ -1,8 +1,4 @@
-package de.jzbor.epos.data.elternportal;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+package de.jzbor.epos.data;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,9 +11,9 @@ public class Subplan implements Serializable {
     private SubstituteDay[] substituteDays;
     private String timestamp;
 
-    public Subplan(String html) throws ParserException {
-        substituteDays = SubstitutePlanParser.getSubstitutions(html);
-        timestamp = parseTimestamp(html);
+    public Subplan(SubstituteDay[] substituteDays, String timestamp) {
+        this.substituteDays = substituteDays;
+        this.timestamp = timestamp;
     }
 
     public static Subplan load(File dir, String name) {
@@ -27,13 +23,6 @@ public class Subplan implements Serializable {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private String parseTimestamp(String html) {
-        Document document = Jsoup.parse(html);
-        Element superdiv = document.getElementsByClass("main_center").first();
-        Element dateElement = superdiv.child(4); // Pretty crappy solution
-        return dateElement.text();
     }
 
     public String getTimestamp() {

@@ -6,12 +6,11 @@ import android.net.NetworkInfo;
 import java.io.IOException;
 
 import de.jzbor.epos.data.DataHandler;
-import de.jzbor.epos.data.elternportal.Calendar;
+import de.jzbor.epos.data.Schedule;
+import de.jzbor.epos.data.elternportal.EPParser;
 import de.jzbor.epos.data.elternportal.ElternPortal;
 import de.jzbor.epos.data.elternportal.ImplicitLoginException;
 import de.jzbor.epos.data.elternportal.ParserException;
-import de.jzbor.epos.data.elternportal.Schedule;
-import de.jzbor.epos.data.elternportal.Subplan;
 import de.jzbor.epos.data.elternportal.SubstitutePlanParser;
 
 public class EPThread extends Thread {
@@ -60,13 +59,12 @@ public class EPThread extends Thread {
                 switch (request) {
                     case WEB_SUBDIR_SUBPLAN: {
                         responseType = UniHandler.RESPONSE_SUBPLAN;
-                        returnObject = new Subplan(responseString);
+                        returnObject = EPParser.parseSubplan(responseString);
                         break;
                     }
                     case WEB_SUBDIR_SCHEDULE: {
                         responseType = UniHandler.RESPONSE_SCHEDULE;
-                        Schedule sch = new Schedule(responseString);
-                        sch.addClasses(responseString);
+                        Schedule sch = EPParser.parseSchedule(responseString);
                         sch.filter();
                         returnObject = sch;
                         // Report name and class
@@ -76,7 +74,7 @@ public class EPThread extends Thread {
                     }
                     case WEB_SUBDIR_DATES: {
                         responseType = UniHandler.RESPONSE_DATES;
-                        returnObject = new Calendar(responseString);
+                        returnObject = EPParser.parseCalendar(responseString);
                         System.out.println(returnObject);
                         break;
                     }

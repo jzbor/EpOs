@@ -16,9 +16,9 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
+import de.jzbor.epos.data.Schedule;
 import de.jzbor.epos.data.elternportal.EPProvider;
 import de.jzbor.epos.data.elternportal.ElternPortal;
-import de.jzbor.epos.data.elternportal.Schedule;
 import de.jzbor.epos.threading.UniHandler;
 
 public class ScheduleSuperFragment extends UpdatableFragment {
@@ -75,7 +75,7 @@ public class ScheduleSuperFragment extends UpdatableFragment {
 
     public void loadVP() {
         pagerAdapter = new SectionsPagerAdapter(this, schedule);
-        viewPager = (ViewPager) getView().findViewById(R.id.view_pager0);
+        viewPager = getView().findViewById(R.id.view_pager0);
         viewPager.setAdapter(pagerAdapter);
         TabLayout tabLayout = getView().findViewById(R.id.tabs);
         // Override refresh layout on action
@@ -96,7 +96,7 @@ public class ScheduleSuperFragment extends UpdatableFragment {
         ((MainActivity) getActivity()).setLoadingIcon(true);
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
         ConnectivityManager cm = (ConnectivityManager) this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        new EPProvider(cm).requestSubplan(handler);
+        new EPProvider(cm).requestSchedule(handler);
         ((MainActivity) getActivity()).setRefreshing(false);
     }
 

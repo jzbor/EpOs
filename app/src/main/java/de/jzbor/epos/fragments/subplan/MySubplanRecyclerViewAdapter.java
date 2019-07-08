@@ -10,8 +10,8 @@ import java.io.IOException;
 
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.elternportal.Schedule;
-import de.jzbor.epos.data.elternportal.SubstituteDay;
+import de.jzbor.epos.data.Schedule;
+import de.jzbor.epos.data.SubstituteDay;
 
 public class MySubplanRecyclerViewAdapter extends RecyclerView.Adapter<MySubplanRecyclerViewAdapter.ViewHolder> {
 

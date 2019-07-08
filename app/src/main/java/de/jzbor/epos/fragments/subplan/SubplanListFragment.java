@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.elternportal.SubstituteDay;
+import de.jzbor.epos.data.SubstituteDay;
 
 public class SubplanListFragment extends Fragment {
 

@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.elternportal.Schedule;
+import de.jzbor.epos.data.Schedule;
 
 /**
  * Implementation of App Widget functionality.

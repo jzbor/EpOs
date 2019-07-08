@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.Date;
 
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.elternportal.Calendar;
+import de.jzbor.epos.data.Calendar;
 
 public class MyDatesRecyclerViewAdapter extends RecyclerView.Adapter<MyDatesRecyclerViewAdapter.ViewHolder> {
 

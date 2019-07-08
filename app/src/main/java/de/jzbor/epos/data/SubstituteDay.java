@@ -1,4 +1,4 @@
-package de.jzbor.epos.data.elternportal;
+package de.jzbor.epos.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -15,7 +15,7 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.data.elternportal.Calendar;
+import de.jzbor.epos.data.Calendar;
 import de.jzbor.epos.data.elternportal.EPProvider;
 import de.jzbor.epos.fragments.UpdatableFragment;
 import de.jzbor.epos.threading.UniHandler;
@@ -93,7 +93,7 @@ public class DatesListFragment extends UpdatableFragment {
         ((MainActivity) getActivity()).setLoadingIcon(true);
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
         ConnectivityManager cm = (ConnectivityManager) this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        new EPProvider(cm).requestSubplan(handler);
+        new EPProvider(cm).requestSchedule(handler);
         ((MainActivity) getActivity()).setRefreshing(false);
     }
 

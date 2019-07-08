@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +19,8 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.NavListener;
 import de.jzbor.epos.R;
+import de.jzbor.epos.data.Schedule;
 import de.jzbor.epos.data.elternportal.ElternPortal;
-import de.jzbor.epos.data.elternportal.Schedule;
 import de.jzbor.epos.fragments.SubstitutionFragment;
 import de.jzbor.epos.fragments.UpdatableFragment;
 import de.jzbor.epos.threading.NextLessonThread;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navView = (NavigationView) findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         NavListener nl = NavListener.getInstance();
         nl.init(this, drawer);
         navView.setNavigationItemSelectedListener(nl);
@@ -115,7 +114,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         // Communicate back action to drawer
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -174,9 +173,9 @@ public class MainActivity extends AppCompatActivity
         else
             loadingCount--;
         if (loadingCount > 0)
-            ((ProgressBar) findViewById(R.id.toolbar_progress_bar)).setVisibility(View.VISIBLE);
+            findViewById(R.id.toolbar_progress_bar).setVisibility(View.VISIBLE);
         else
-            ((ProgressBar) findViewById(R.id.toolbar_progress_bar)).setVisibility(View.INVISIBLE);
+            findViewById(R.id.toolbar_progress_bar).setVisibility(View.INVISIBLE);
     }
 
     public UpdatableFragment getFragment() {

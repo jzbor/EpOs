@@ -1,39 +1,31 @@
-package de.jzbor.epos.data.elternportal;
+package de.jzbor.epos.data;
 
 import android.util.Log;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
 
 public class Schedule implements Serializable {
 
     // @TODO Replace with xml strings
     private static final String[] WORKING_DAYS = {"Mo", "Di", "Mi", "Do", "Fr"};
     private static final String TAG = "mySchedule";
-    private static final int DEFAULT_START_TIME = 7 * 60 + 55;
+    public static final int DEFAULT_START_TIME = 7 * 60 + 55;
     private static final long FORECAST_TIME = 5 * 60 * 1000; // (millis)
     private static int staticStartTime;
     private int startTime;
     private String[][] days;
-    private HashMap<String, String> classes;
+    private Map<String, String> classes;
 
-    public Schedule(String[][] days) {
+    public Schedule(String[][] days, Map<String, String> classes, int startTime) {
         this.days = days;
         startTime = DEFAULT_START_TIME;
-        classes = new HashMap<>();
-    }
-
-    public Schedule(String html) throws ParserException {
-        parse(html);
+        this.classes = classes;
+        this.startTime = startTime;
     }
 
     public static int nextWorkingDay() {
@@ -125,83 +117,9 @@ public class Schedule implements Serializable {
 
     }
 
-    public void parse(String html) throws ParserException {
-        try {
-            days = new String[5][];
-            for (int i = 0; i < days.length; i++) {
-                days[i] = new String[15];
-            }
-            Document document = Jsoup.parse(html);
-            // Get table schedule
-            Element table = document.getElementsByClass("table table-condensed table-bordered").first().child(0);
-            Elements tableRows = table.children();
-            for (int i = 0; i < 15; i++) {
-                for (int j = 0; j < 5; j++) {
-                    // Get cells (note the +1 for ignoring the time and day cells)
-                    days[j][i] = tableRows.get(i + 1).child(j + 1).text();
-                }
-            }
-        } catch (Exception e) {
-            throw new ParserException("Unable to parse HTML", e);
-        }
-        addClasses(html);
-        try {
-            addStartTime(html);
-        } catch (ParserException e) {
-            e.printStackTrace();
-            startTime = DEFAULT_START_TIME;
-        }
-    }
-
     public String[] getDay(int i) {
         Log.d(TAG, "getDay: " + i);
         return days[i];
-    }
-
-    public void addClasses(String html) throws ParserException {
-        try {
-            Document document = Jsoup.parse(html);
-            Element tbodyElement = document.getElementsByAttributeValue("id", "asam_content").first()    // <div>
-                    .child(3)       // <table>
-                    .child(0);      // <tbody>
-            Element titleRowElement = tbodyElement.child(0);
-            Element contentRowElement = tbodyElement.child(1);
-            // Workaround for problem ("Schülergruppen vs Kurse")
-            int i;
-            for (i = 0; i < titleRowElement.children().size(); i++) {
-                Element titleElement = titleRowElement.child(i);
-                if (titleElement.text().contains("Kurs"))
-                    break;
-            }
-            Element element = contentRowElement.child(i);
-            String innerHtml = element.html();
-            // Get classes (They're divided by "<br>")
-            String[] origClasses = innerHtml.split("<br>");
-            classes = new HashMap<>();
-            for (String origClass : origClasses) {
-                String[] temp = origClass.split(", ", 2);
-                classes.put(temp[0], temp[1]);
-            }
-        } catch (Exception e) {
-            throw new ParserException("Unable to parse HTML", e);
-        }
-    }
-
-    public void addStartTime(String html) throws ParserException {
-        try {
-            Document document = Jsoup.parse(html);
-            Element tbodyElement = document
-                    .getElementsByClass("table table-condensed table-bordered")
-                    .first()        // <table>
-                    .child(0);      // <tbody>
-            Element tdElement = tbodyElement.child(1)   // <tr>
-                    .child(0);      // <td>     content like "1<br>07.55 - 08.40"
-            String times = tdElement.html().split("<br>")[1];
-            String time = times.split(" - ")[0];
-            startTime = Integer.parseInt(time.split("\\.")[0]) * 60 + Integer.parseInt(time.split("\\.")[1]);
-        } catch (Exception e) {
-            throw new ParserException("Unable to parse HTML", e);
-        }
     }
 
     public void set(int day, int lesson, String str) {

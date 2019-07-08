@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
+import de.jzbor.epos.data.Subplan;
 import de.jzbor.epos.data.elternportal.EPProvider;
-import de.jzbor.epos.data.elternportal.Subplan;
 import de.jzbor.epos.fragments.subplan.SubplanListFragment;
 import de.jzbor.epos.threading.UniHandler;
 

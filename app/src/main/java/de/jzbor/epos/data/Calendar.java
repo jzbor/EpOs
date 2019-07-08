@@ -1,9 +1,4 @@
-package de.jzbor.epos.data.elternportal;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+package de.jzbor.epos.data;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -20,9 +15,12 @@ public class Calendar implements Serializable {
     private static final String FORMAT = "dd.MM.yyyy";
     private Map<String, String> dates;
 
-    public Calendar(String html) {
-        dates = new TreeMap<>(new DateComparator());
-        parse(html);
+    public Calendar(Map<String, String> dates) {
+        this.dates = dates;
+    }
+
+    public Calendar() {
+        dates = new TreeMap<>(new Calendar.DateComparator());
     }
 
     public static Date stringToDate(String string) {
@@ -32,20 +30,6 @@ public class Calendar implements Serializable {
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    private void parse(String html) {
-        Document document = Jsoup.parse(html);
-        Element tbodyElement = document.getElementsByClass("table2").first().child(0);
-        Elements trElements = tbodyElement.children();
-        for (Element e :
-                trElements) {
-            if (e.children().size() == 3) {
-                String date = e.child(0).text();
-                String subject = e.child(2).text();
-                dates.put(date, subject);
-            }
         }
     }
 
@@ -76,7 +60,7 @@ public class Calendar implements Serializable {
         return sb.toString();
     }
 
-    private class DateComparator implements Comparator<String>, Serializable {
+    public static class DateComparator implements Comparator<String>, Serializable {
         @Override
         public int compare(String s, String t1) {
             Date d1 = stringToDate(s);
