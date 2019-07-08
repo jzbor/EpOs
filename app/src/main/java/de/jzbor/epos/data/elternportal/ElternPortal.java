@@ -1,4 +1,4 @@
-package de.jzbor.epos.elternportal;
+package de.jzbor.epos.data.elternportal;
 
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;

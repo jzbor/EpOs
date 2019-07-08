@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.elternportal.Subplan;
+import de.jzbor.epos.data.elternportal.EPProvider;
+import de.jzbor.epos.data.elternportal.Subplan;
 import de.jzbor.epos.fragments.subplan.SubplanListFragment;
-import de.jzbor.epos.threading.ComThread;
 import de.jzbor.epos.threading.UniHandler;
 
 public class SubstitutionFragment extends UpdatableFragment {
@@ -66,8 +66,8 @@ public class SubstitutionFragment extends UpdatableFragment {
         ((MainActivity) getActivity()).setLoadingIcon(true);
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
         ConnectivityManager cm = (ConnectivityManager) this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        ComThread ct = new ComThread(cm, handler);
-        ct.start("service/vertretungsplan");
+        new EPProvider(cm).requestSubplan(handler);
+        ((MainActivity) getActivity()).setRefreshing(false);
     }
 
     public void setListFragment(SubplanListFragment subplanListFragment, int index) {

@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="de.jzbor.epos.fragments.dates.DatesListFragment"
+    android:name="de.jzbor.epos.fragments.calendar.DatesListFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipChildren="true"
     app:layoutManager="LinearLayoutManager"
-    tools:context="de.jzbor.epos.fragments.dates.DatesListFragment"
+    tools:context="de.jzbor.epos.fragments.calendar.DatesListFragment"
     tools:listitem="@layout/fragment_dates_date" />

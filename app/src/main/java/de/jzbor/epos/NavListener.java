@@ -13,7 +13,7 @@ import de.jzbor.epos.activities.MainActivity;
 import de.jzbor.epos.activities.ToDoActivity;
 import de.jzbor.epos.fragments.ScheduleSuperFragment;
 import de.jzbor.epos.fragments.SubstitutionFragment;
-import de.jzbor.epos.fragments.dates.DatesListFragment;
+import de.jzbor.epos.fragments.calendar.DatesListFragment;
 
 public class NavListener implements NavigationView.OnNavigationItemSelectedListener {
     private static final NavListener ourInstance = new NavListener();

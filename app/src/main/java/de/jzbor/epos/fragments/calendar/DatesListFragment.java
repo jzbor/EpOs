@@ -1,4 +1,4 @@
-package de.jzbor.epos.fragments.dates;
+package de.jzbor.epos.fragments.calendar;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -15,25 +15,25 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.elternportal.Dates;
+import de.jzbor.epos.data.elternportal.Calendar;
+import de.jzbor.epos.data.elternportal.EPProvider;
 import de.jzbor.epos.fragments.UpdatableFragment;
-import de.jzbor.epos.threading.ComThread;
 import de.jzbor.epos.threading.UniHandler;
 
 public class DatesListFragment extends UpdatableFragment {
 
-    private static final String ARG_DATES = "dates";
+    private static final String ARG_DATES = "calendar";
     private static final String TAG = "DatesListFragment";
     private RecyclerView recyclerView;
-    private Dates dates;
+    private Calendar calendar;
 
     public DatesListFragment() {
     }
 
-    public static DatesListFragment newInstance(Dates dates) {
+    public static DatesListFragment newInstance(Calendar calendar) {
         DatesListFragment fragment = new DatesListFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_DATES, dates);
+        args.putSerializable(ARG_DATES, calendar);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,7 +44,7 @@ public class DatesListFragment extends UpdatableFragment {
         View view = inflater.inflate(R.layout.fragment_dates_list, container, false);
 
         if (getArguments() != null && !getArguments().isEmpty()) {
-            dates = (Dates) getArguments().getSerializable(ARG_DATES);
+            calendar = (Calendar) getArguments().getSerializable(ARG_DATES);
         } else {
             TextView tv = new TextView(getContext());
             tv.setText("Error");
@@ -68,17 +68,17 @@ public class DatesListFragment extends UpdatableFragment {
             // Set to own LayoutManager to suppress scrolling features
             recyclerView.setLayoutManager(new DatesListFragment.StaticLinearLayoutManager(context));
             // @TODO Improve - see ScheduleListFragment
-            if (dates != null)
-                recyclerView.setAdapter(new MyDatesRecyclerViewAdapter(dates));
+            if (calendar != null)
+                recyclerView.setAdapter(new MyDatesRecyclerViewAdapter(calendar));
             // update();
         }
         return view;
     }
 
     public void update() {
-        if (dates != null) {
+        if (calendar != null) {
             if (recyclerView != null) {
-                recyclerView.setAdapter(new MyDatesRecyclerViewAdapter(dates));
+                recyclerView.setAdapter(new MyDatesRecyclerViewAdapter(calendar));
             } else if (isAdded()) {
                 TextView tv = new TextView(getContext());
                 tv.setText("Error");
@@ -93,17 +93,16 @@ public class DatesListFragment extends UpdatableFragment {
         ((MainActivity) getActivity()).setLoadingIcon(true);
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
         ConnectivityManager cm = (ConnectivityManager) this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        ComThread ct = new ComThread(cm, handler);
-        ct.start(ComThread.WEB_SUBDIR_DATES);
+        new EPProvider(cm).requestSubplan(handler);
         ((MainActivity) getActivity()).setRefreshing(false);
     }
 
     @Override
     public void loadCache() throws IOException, ClassNotFoundException {
         System.out.println("Load cache");
-        dates = (Dates) App.openObject(getActivity().getApplicationContext().getCacheDir(), getString(R.string.filename_dates));
+        calendar = (Calendar) App.openObject(getActivity().getApplicationContext().getCacheDir(), getString(R.string.filename_dates));
         if (recyclerView != null) {
-            recyclerView.setAdapter(new MyDatesRecyclerViewAdapter(dates));
+            recyclerView.setAdapter(new MyDatesRecyclerViewAdapter(calendar));
         }
         System.out.println("\tEnd load cache");
     }

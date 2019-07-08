@@ -9,24 +9,14 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.elternportal.Dates;
-import de.jzbor.epos.elternportal.Schedule;
-import de.jzbor.epos.elternportal.Subplan;
+import de.jzbor.epos.data.DataHandler;
+import de.jzbor.epos.data.elternportal.Calendar;
+import de.jzbor.epos.data.elternportal.Schedule;
+import de.jzbor.epos.data.elternportal.Subplan;
 
-public class UniHandler extends Handler {
+public class UniHandler extends Handler implements DataHandler {
 
-    public static final int TOAST = 1;
-    public static final int EP_RESPONSE_SUBPLAN = 2;
-    public static final int EP_RESPONSE_SCHEDULE = 3;
-    public static final int EP_RESPONSE_PERSONAL = 4;
-    public static final int EP_RESPONSE_DATES = 5;
-    public static final int EP_REPORT_NAME_CLASS = 6;
-    public static final int UPDATE_NEXT_LESSON = 7;
-    public static final int ERROR_UNKNOWN = 600;
-    public static final int ERROR_EP_CONNECTION = 601;
-    public static final int ERROR_EP_PARSING = 602;
-    public static final int ERROR_EP_LOGIN = 603;
-    public static final int ERROR_EP_SAVING = 604;
+
     public static final String TAG = "UniHandler";
     public MainActivity activity;
 
@@ -41,8 +31,8 @@ public class UniHandler extends Handler {
                 toast((String) msg.obj);
                 break;
             }
-            case EP_RESPONSE_SUBPLAN: {
-                Subplan subplan = (Subplan) (((Object[]) msg.obj)[0]);
+            case RESPONSE_SUBPLAN: {
+                Subplan subplan = (Subplan) (msg.obj);
                 boolean saved = subplan.save(activity.getApplicationContext().getCacheDir(),
                         activity.getString(R.string.filename_subplan));
                 if (saved)
@@ -50,8 +40,8 @@ public class UniHandler extends Handler {
                 // Missing else? onUpdateFailure?
                 break;
             }
-            case EP_RESPONSE_SCHEDULE: {
-                Schedule schedule = (Schedule) (((Object[]) msg.obj)[0]);
+            case RESPONSE_SCHEDULE: {
+                Schedule schedule = (Schedule) (msg.obj);
                 try {
                     App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_schedule), schedule);
                     activity.onUpdateSucceeded();
@@ -62,8 +52,8 @@ public class UniHandler extends Handler {
                 recMsg.sendToTarget();
                 break;
             }
-            case EP_RESPONSE_PERSONAL: {
-                String[] pers = (String[]) (((Object[]) msg.obj)[0]);
+            case RESPONSE_PERSONAL: {
+                String[] pers = (String[]) (msg.obj);
                 try {
                     App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_personal), pers);
                     activity.onUpdateSucceeded();
@@ -72,17 +62,17 @@ public class UniHandler extends Handler {
                 }
                 break;
             }
-            case EP_RESPONSE_DATES: {
-                Dates dates = (Dates) (((Object[]) msg.obj)[0]);
+            case RESPONSE_DATES: {
+                Calendar calendar = (Calendar) (msg.obj);
                 try {
-                    App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_dates), dates);
+                    App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_dates), calendar);
                     activity.onUpdateSucceeded();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;
             }
-            case EP_REPORT_NAME_CLASS: {
+            case REPORT_NAME_CLASS: {
                 try {
                     App.saveObject(activity.getCacheDir(), activity.getString(R.string.filename_personal), msg.obj);
                 } catch (IOException e) {
@@ -98,19 +88,19 @@ public class UniHandler extends Handler {
                 activity.onUpdateFailed();
                 break;
             }
-            case ERROR_EP_CONNECTION: {
+            case ERROR_CONNECTION: {
                 activity.onUpdateFailed();
                 break;
             }
-            case ERROR_EP_PARSING: {
+            case ERROR_PARSING: {
                 activity.onUpdateFailed();
                 break;
             }
-            case ERROR_EP_LOGIN: {
+            case ERROR_LOGIN: {
                 activity.onUpdateFailed();
                 break;
             }
-            case ERROR_EP_SAVING: {
+            case ERROR_SAVING: {
                 activity.onUpdateFailed();
                 break;
             }
@@ -119,5 +109,11 @@ public class UniHandler extends Handler {
 
     private void toast(String string) {
         Toast.makeText(activity, string, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void handle(int type, int id, Object object) {
+        Message msg = obtainMessage(type, object);
+        msg.sendToTarget();
     }
 }

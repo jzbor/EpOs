@@ -16,9 +16,9 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.elternportal.ElternPortal;
-import de.jzbor.epos.elternportal.Schedule;
-import de.jzbor.epos.threading.ComThread;
+import de.jzbor.epos.data.elternportal.EPProvider;
+import de.jzbor.epos.data.elternportal.ElternPortal;
+import de.jzbor.epos.data.elternportal.Schedule;
 import de.jzbor.epos.threading.UniHandler;
 
 public class ScheduleSuperFragment extends UpdatableFragment {
@@ -96,8 +96,7 @@ public class ScheduleSuperFragment extends UpdatableFragment {
         ((MainActivity) getActivity()).setLoadingIcon(true);
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
         ConnectivityManager cm = (ConnectivityManager) this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        ComThread ct = new ComThread(cm, handler);
-        ct.start("service/stundenplan");
+        new EPProvider(cm).requestSubplan(handler);
         ((MainActivity) getActivity()).setRefreshing(false);
     }
 

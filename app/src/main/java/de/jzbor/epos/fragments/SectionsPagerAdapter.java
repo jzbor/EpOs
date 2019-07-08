@@ -1,17 +1,10 @@
 package de.jzbor.epos.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
-import de.jzbor.epos.R;
-import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.elternportal.Schedule;
+import de.jzbor.epos.data.elternportal.Schedule;
 import de.jzbor.epos.fragments.schedule.ScheduleListFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {

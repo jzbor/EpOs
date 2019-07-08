@@ -1,4 +1,7 @@
-package de.jzbor.epos.elternportal;
+package de.jzbor.epos.data.elternportal;
+
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 public class ImplicitLoginException extends Exception {
     public ImplicitLoginException() {
@@ -17,6 +20,7 @@ public class ImplicitLoginException extends Exception {
         super(cause);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     protected ImplicitLoginException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }

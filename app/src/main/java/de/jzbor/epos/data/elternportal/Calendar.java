@@ -1,4 +1,4 @@
-package de.jzbor.epos.elternportal;
+package de.jzbor.epos.data.elternportal;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,12 +15,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Dates implements Serializable {
+public class Calendar implements Serializable {
 
     private static final String FORMAT = "dd.MM.yyyy";
     private Map<String, String> dates;
 
-    public Dates(String html) {
+    public Calendar(String html) {
         dates = new TreeMap<>(new DateComparator());
         parse(html);
     }

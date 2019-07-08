@@ -2,32 +2,32 @@ package de.jzbor.epos.threading;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Message;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import de.jzbor.epos.elternportal.Dates;
-import de.jzbor.epos.elternportal.ElternPortal;
-import de.jzbor.epos.elternportal.ImplicitLoginException;
-import de.jzbor.epos.elternportal.ParserException;
-import de.jzbor.epos.elternportal.Schedule;
-import de.jzbor.epos.elternportal.Subplan;
-import de.jzbor.epos.elternportal.SubstitutePlanParser;
+import de.jzbor.epos.data.DataHandler;
+import de.jzbor.epos.data.elternportal.Calendar;
+import de.jzbor.epos.data.elternportal.ElternPortal;
+import de.jzbor.epos.data.elternportal.ImplicitLoginException;
+import de.jzbor.epos.data.elternportal.ParserException;
+import de.jzbor.epos.data.elternportal.Schedule;
+import de.jzbor.epos.data.elternportal.Subplan;
+import de.jzbor.epos.data.elternportal.SubstitutePlanParser;
 
-public class ComThread extends Thread {
+public class EPThread extends Thread {
 
     public static final String WEB_SUBDIR_SUBPLAN = "service/vertretungsplan";
     public static final String WEB_SUBDIR_SCHEDULE = "service/stundenplan";
     public static final String WEB_SUBDIR_DATES = "service/termine/liste";
-    private static final String TAG = "ComThread";
+    private static final String TAG = "EPThread";
     private ConnectivityManager connectivityManager;
-    private UniHandler handler;
+    private DataHandler handler;
     private String request;
+    private int id;
 
-    public ComThread(ConnectivityManager cm, UniHandler h) {
+    public EPThread(ConnectivityManager cm, DataHandler h, int id) {
         super();
+        this.id = id;
         connectivityManager = cm;
         handler = h;
     }
@@ -44,49 +44,45 @@ public class ComThread extends Thread {
             return;
 
         // Initialize return elements
-        int returnCode = 0;
-        String timestamp = "0";
         int responseType;
         Object returnObject = "";
-        Message msg = handler.obtainMessage(UniHandler.ERROR_UNKNOWN);
 
         try {
             // Check for network connectivity
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
             if ((networkInfo == null) || (!networkInfo.isConnectedOrConnecting())) {
-                responseType = UniHandler.ERROR_EP_CONNECTION;
+                responseType = UniHandler.ERROR_CONNECTION;
             } else {
                 ElternPortal ep = ElternPortal.getInstance();
                 // Request html content
                 String responseString = ep.getHTML(request);
-                timestamp = new SimpleDateFormat("E HH:mm").format(new Date());
                 // Switch for handling of different requests
                 switch (request) {
                     case WEB_SUBDIR_SUBPLAN: {
-                        responseType = UniHandler.EP_RESPONSE_SUBPLAN;
+                        responseType = UniHandler.RESPONSE_SUBPLAN;
                         returnObject = new Subplan(responseString);
                         break;
                     }
                     case WEB_SUBDIR_SCHEDULE: {
-                        responseType = UniHandler.EP_RESPONSE_SCHEDULE;
+                        responseType = UniHandler.RESPONSE_SCHEDULE;
                         Schedule sch = new Schedule(responseString);
                         sch.addClasses(responseString);
                         sch.filter();
                         returnObject = sch;
                         // Report name and class
-                        Message ncMsg = handler.obtainMessage(UniHandler.EP_REPORT_NAME_CLASS, SubstitutePlanParser.parseNameClass(responseString));
-                        ncMsg.sendToTarget();
+                        handler.handle(DataHandler.REPORT_NAME_CLASS, id,
+                                SubstitutePlanParser.parseNameClass(responseString));
                         break;
                     }
                     case WEB_SUBDIR_DATES: {
-                        responseType = UniHandler.EP_RESPONSE_DATES;
-                        returnObject = new Dates(responseString);
+                        responseType = UniHandler.RESPONSE_DATES;
+                        returnObject = new Calendar(responseString);
                         System.out.println(returnObject);
                         break;
                     }
                     case "personal": {
                         // @TODO implement
-                        responseType = UniHandler.EP_RESPONSE_PERSONAL;
+                        responseType = UniHandler.RESPONSE_PERSONAL;
                         break;
                     }
                     default: {
@@ -96,25 +92,20 @@ public class ComThread extends Thread {
                 }
             }
             // Pack return array
-            Object[] objects = new Object[2];
-            objects[0] = returnObject;
-            objects[1] = timestamp;
-            msg = handler.obtainMessage(responseType, objects);
+            handler.handle(responseType, id, returnObject);
             // Handle various exceptions
         } catch (IOException e) {
             e.printStackTrace();
-            msg = handler.obtainMessage(UniHandler.ERROR_EP_CONNECTION);
+            handler.handle(DataHandler.ERROR_CONNECTION, id, null);
         } catch (ImplicitLoginException e) {
             e.printStackTrace();
-            msg = handler.obtainMessage(UniHandler.ERROR_EP_LOGIN);
+            handler.handle(DataHandler.ERROR_LOGIN, id, null);
         } catch (ParserException e) {
             e.printStackTrace();
-            msg = handler.obtainMessage(UniHandler.ERROR_EP_PARSING);
+            handler.handle(DataHandler.ERROR_PARSING, id, null);
         } catch (Exception e) {
-            msg = handler.obtainMessage(UniHandler.ERROR_UNKNOWN);
+            handler.handle(DataHandler.ERROR_UNKNOWN, id, null);
             e.printStackTrace();
-        } finally {
-            msg.sendToTarget();
         }
     }
 }

@@ -1,4 +1,4 @@
-package de.jzbor.epos.fragments.dates;
+package de.jzbor.epos.fragments.calendar;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,14 +9,14 @@ import android.widget.TextView;
 import java.util.Date;
 
 import de.jzbor.epos.R;
-import de.jzbor.epos.elternportal.Dates;
+import de.jzbor.epos.data.elternportal.Calendar;
 
 public class MyDatesRecyclerViewAdapter extends RecyclerView.Adapter<MyDatesRecyclerViewAdapter.ViewHolder> {
 
-    private Dates dates;
+    private Calendar calendar;
 
-    public MyDatesRecyclerViewAdapter(Dates dates) {
-        this.dates = dates;
+    public MyDatesRecyclerViewAdapter(Calendar calendar) {
+        this.calendar = calendar;
     }
 
     @Override
@@ -28,8 +28,8 @@ public class MyDatesRecyclerViewAdapter extends RecyclerView.Adapter<MyDatesRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        String key = dates.getDatesAfter(new Date()).keySet().toArray(new String[0])[position];
-        String value = dates.getDatesAfter(new Date()).get(key);
+        String key = calendar.getDatesAfter(new Date()).keySet().toArray(new String[0])[position];
+        String value = calendar.getDatesAfter(new Date()).get(key);
 
         holder.date.setText(key);
         holder.subject.setText(value);
@@ -46,7 +46,7 @@ public class MyDatesRecyclerViewAdapter extends RecyclerView.Adapter<MyDatesRecy
 
     @Override
     public int getItemCount() {
-        return dates.getDatesAfter(new Date()).size();
+        return calendar.getDatesAfter(new Date()).size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
