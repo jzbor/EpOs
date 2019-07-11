@@ -10,7 +10,7 @@
             android:title="@string/nav_substitutions" />
         <item
             android:id="@+id/nav_schedule"
-            android:icon="@drawable/ic_menu_scedule"
+            android:icon="@drawable/ic_menu_schedule"
             android:title="@string/nav_scedule" />
         <item
             android:id="@+id/nav_news"
@@ -25,13 +25,9 @@
             android:icon="@drawable/ic_menu_todo"
             android:title="@string/nav_todo" />
         <item
-            android:id="@+id/nav_ep_login"
-            android:icon="@drawable/ic_menu_login"
-            android:title="@string/nav_ep_login" />
-        <item
-            android:id="@+id/nav_dsb_login"
-            android:icon="@drawable/ic_menu_login"
-            android:title="@string/nav_dsb_login" />
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/nav_settings" />
         <item
             android:id="@+id/nav_info"
             android:icon="@drawable/ic_menu_info"

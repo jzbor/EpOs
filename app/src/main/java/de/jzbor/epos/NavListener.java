@@ -7,10 +7,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
-import de.jzbor.epos.activities.DSBLoginActivity;
-import de.jzbor.epos.activities.EPLoginActivity;
 import de.jzbor.epos.activities.InfoActivity;
 import de.jzbor.epos.activities.MainActivity;
+import de.jzbor.epos.activities.SettingsActivity;
 import de.jzbor.epos.activities.ToDoActivity;
 import de.jzbor.epos.fragments.ScheduleSuperFragment;
 import de.jzbor.epos.fragments.SubstitutionFragment;
@@ -51,11 +50,8 @@ public class NavListener implements NavigationView.OnNavigationItemSelectedListe
         } else if (id == R.id.nav_todo) {
             Intent i = new Intent(activity, ToDoActivity.class);
             activity.startActivity(i);
-        } else if (id == R.id.nav_ep_login) {
-            Intent i = new Intent(activity, EPLoginActivity.class);
-            activity.startActivity(i);
-        } else if (id == R.id.nav_dsb_login) {
-            Intent i = new Intent(activity, DSBLoginActivity.class);
+        } else if (id == R.id.nav_settings) {
+            Intent i = new Intent(activity, SettingsActivity.class);
             activity.startActivity(i);
         } else if (id == R.id.nav_info) {
             Intent i = new Intent(activity, InfoActivity.class);

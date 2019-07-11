@@ -16,6 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activities.SettingsActivity"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.jzbor.epos.activities.MainActivity" />
+        </activity>
+        <activity
             android:name=".activities.ToDoActivity"
             android:label="@string/title_activity_to_do"
             android:parentActivityName=".activities.MainActivity"
