@@ -159,13 +159,8 @@ public class Schedule implements Serializable {
                 String[] rooms = split[1].split("/");
                 // Iterate over input from schedule
                 for (int k = 0; k < tempClasses.length; k++) {
-                    // Iterate over classes
-                    for (String c : classes.keySet()) {
-                        // Compare them both
-                        // @TODO fix bug (crossed out subject --> double subject)
-                        if (tempClasses[k].contains(c)) {
-                            str += tempClasses[k] + " " + rooms[k];
-                        }
+                    if (inClasses(tempClasses[k])) {
+                        str += tempClasses[k] + " " + rooms[k];
                     }
                 }
                 days[i][j] = str;
@@ -176,7 +171,7 @@ public class Schedule implements Serializable {
     public boolean inClasses(String c) {
         // Checks whether a certain class is contained in classes
         for (String e : classes.keySet()) {
-            if (e.equals(c))
+            if (e.toLowerCase().equals(c.toLowerCase()))
                 return true;
         }
         return false;
