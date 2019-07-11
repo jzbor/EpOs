@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import de.jzbor.epos.data.DataHandler;
 import de.jzbor.epos.data.DataProvider;
+import de.jzbor.epos.data.Subplan;
 
 public class DSBProvider extends Thread implements DataProvider {
 

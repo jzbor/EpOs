@@ -8,6 +8,9 @@ import org.jsoup.select.Elements;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.jzbor.epos.data.Subplan;
+import de.jzbor.epos.data.SubstituteDay;
+
 public class DSBParser {
 
     public static final String SUBPLAN_URL_KEY = "timetableurl";

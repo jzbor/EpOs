@@ -41,7 +41,6 @@ import de.jzbor.epos.data.dsb.DSBProvider;
  */
 public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    private static final String TAG = "EPLoginActivity";
     private UserLoginTask mAuthTask = null;
     // UI references.
     private AppCompatEditText mUserView;
@@ -83,7 +82,7 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
 
         // Load past details if available
         try {
-            String[] login = (String[]) App.openObject(getApplicationContext().getCacheDir(), getString(R.string.filename_ep_login));
+            String[] login = (String[]) App.openObject(getApplicationContext().getCacheDir(), getString(R.string.filename_dsb_login));
             if (login.length >= 3) {
                 mUserView.setText(login[0]);
                 mPasswordView.setText(login[1]);
@@ -137,10 +136,6 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
             mUserView.setError(getString(R.string.error_field_required));
             focusView = mUserView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mUserView.setError(getString(R.string.error_invalid_email));
-            focusView = mUserView;
-            cancel = true;
         }
 
         // @TODO Add checking for school
@@ -156,10 +151,6 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
             mAuthTask = new UserLoginTask(email, password, school, new Toaster(this));
             mAuthTask.execute((Void) null);
         }
-    }
-
-    private boolean isEmailValid(String email) {
-        return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
@@ -299,7 +290,7 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
                     if (DSBProvider.checkLogin(mUser, mPassword)) {
                         // @TODO add filter
                         DSBProvider.login(mUser, mPassword);
-                        String[] login = {mUser, mPassword};
+                        String[] login = {mUser, mPassword, null};
                         App.saveObject(getApplicationContext().getCacheDir(), getString(R.string.filename_dsb_login), login);
                         return true;
                     } else {

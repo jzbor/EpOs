@@ -1,5 +1,7 @@
 package de.jzbor.epos.threading;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import de.jzbor.epos.data.DataHandler;
@@ -41,6 +43,8 @@ public class EPThread extends Thread {
         // Initialize return elements
         int responseType;
         Object returnObject = "";
+
+        Log.d(TAG, "1802: run: " + request);
 
         try {
             ElternPortal ep = ElternPortal.getInstance();

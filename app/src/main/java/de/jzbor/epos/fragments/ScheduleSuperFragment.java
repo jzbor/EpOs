@@ -102,8 +102,8 @@ public class ScheduleSuperFragment extends UpdatableFragment {
         if (ProviderManager.inetReady((ConnectivityManager)
                 Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))))
             ;
-        DataProvider provider = ProviderManager.getProvider(ProviderManager.SUBPLAN, new DSBProvider(), new EPProvider());
-        provider.requestSubplan(handler);
+        DataProvider provider = ProviderManager.getProvider(ProviderManager.SCHEDULE, new DSBProvider(), new EPProvider());
+        provider.requestSchedule(handler);
     }
 
 

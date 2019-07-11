@@ -99,8 +99,8 @@ public class DatesListFragment extends UpdatableFragment {
         if (ProviderManager.inetReady((ConnectivityManager)
                 Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))))
             ;
-        DataProvider provider = ProviderManager.getProvider(ProviderManager.SUBPLAN, new DSBProvider(), new EPProvider());
-        provider.requestSubplan(handler);
+        DataProvider provider = ProviderManager.getProvider(ProviderManager.CALENDAR, new DSBProvider(), new EPProvider());
+        provider.requestCalendar(handler);
     }
 
     @Override

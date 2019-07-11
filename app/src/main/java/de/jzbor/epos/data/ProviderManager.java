@@ -27,7 +27,7 @@ public class ProviderManager {
                     }
                     case SCHEDULE: {
                         if (providers[i].providesSchedule()) {
-                            Log.d(TAG, "getProvider: " + providers[i]);
+                            Log.d(TAG, "1802: getProvider: " + providers[i]);
                             return providers[i];
                         }
                         break;
