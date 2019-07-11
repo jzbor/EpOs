@@ -14,6 +14,7 @@ import de.jzbor.epos.data.SubstituteDay;
 public class DSBParser {
 
     public static final String SUBPLAN_URL_KEY = "timetableurl";
+    public static String filter;
 
     public static Map<String, String> parseSubplanInfo(String json) {
         json = json.substring(2, json.length() - 2);
@@ -42,14 +43,16 @@ public class DSBParser {
             Element tableRoot = tableElements.get(i).child(0);
             for (int j = 1; j < tableRoot.children().size(); j++) {
                 Element rowElement = tableRoot.child(j);
-                String[] sub = new String[]{
-                        rowElement.child(1).text(),
-                        rowElement.child(3).text(),
-                        rowElement.child(2).text(),
-                        rowElement.child(6).text(),
-                        rowElement.child(4).text()
-                };
-                subday.addSubstitution(sub);
+                if (filter == null || rowElement.child(0).text().contains(filter)) {
+                    String[] sub = new String[]{
+                            rowElement.child(1).text(),
+                            rowElement.child(3).text(),
+                            rowElement.child(2).text(),
+                            rowElement.child(6).text(),
+                            rowElement.child(4).text()
+                    };
+                    subday.addSubstitution(sub);
+                }
             }
             if (i < subArr.length) {
                 subArr[i] = subday;
@@ -63,5 +66,9 @@ public class DSBParser {
         timestamp = tss[0] + " " + tss[1] + " " + tss[2];
 
         return new Subplan(subArr, timestamp);
+    }
+
+    public static void setFilter(String filter) {
+        DSBParser.filter = filter;
     }
 }

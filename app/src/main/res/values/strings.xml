@@ -68,4 +68,5 @@
     <string name="nav_dsb_login">DSB Login</string>
     <string name="filename_dsb_login">dsb_login.sa</string>
     <string name="title_activity_dsb_login">DSB Login</string>
+    <string name="prompt_filter">Class filter</string>
 </resources>

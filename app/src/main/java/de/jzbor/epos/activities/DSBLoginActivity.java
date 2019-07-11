@@ -34,6 +34,7 @@ import java.util.List;
 
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
+import de.jzbor.epos.data.dsb.DSBParser;
 import de.jzbor.epos.data.dsb.DSBProvider;
 
 /**
@@ -45,6 +46,7 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
     // UI references.
     private AppCompatEditText mUserView;
     private AppCompatEditText mPasswordView;
+    private AppCompatEditText mFilterView;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -69,6 +71,8 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
             }
         });
 
+        mFilterView = findViewById(R.id.filter);
+
         Button mUserSignInButton = findViewById(R.id.email_sign_in_button);
         mUserSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -86,6 +90,7 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
             if (login.length >= 3) {
                 mUserView.setText(login[0]);
                 mPasswordView.setText(login[1]);
+                mFilterView.setText(login[2]);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -117,9 +122,9 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mUserView.getText().toString();
+        String user = mUserView.getText().toString();
         String password = mPasswordView.getText().toString();
-        String school = getResources().getString(R.string.default_school);
+        String filter = mFilterView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -131,14 +136,14 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
             cancel = true;
         }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
+        // Check for a valid user address.
+        if (TextUtils.isEmpty(user)) {
             mUserView.setError(getString(R.string.error_field_required));
             focusView = mUserView;
             cancel = true;
         }
 
-        // @TODO Add checking for school
+        // @TODO Add checking for filter
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -148,7 +153,7 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password, school, new Toaster(this));
+            mAuthTask = new UserLoginTask(user, password, filter, new Toaster(this));
             mAuthTask.execute((Void) null);
         }
     }
@@ -266,14 +271,14 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
 
         private final String mUser;
         private final String mPassword;
-        private final String mSchool;
+        private final String mFilter;
         private final Toaster toaster;
         private int errorCode;
 
-        UserLoginTask(String email, String password, String school, Toaster toaster) {
+        UserLoginTask(String email, String password, String filter, Toaster toaster) {
             mUser = email;
             mPassword = password;
-            mSchool = school;
+            mFilter = filter;
             this.toaster = toaster;
             errorCode = 0;
         }
@@ -290,7 +295,8 @@ public class DSBLoginActivity extends AppCompatActivity implements LoaderCallbac
                     if (DSBProvider.checkLogin(mUser, mPassword)) {
                         // @TODO add filter
                         DSBProvider.login(mUser, mPassword);
-                        String[] login = {mUser, mPassword, null};
+                        DSBParser.setFilter(mFilter);
+                        String[] login = {mUser, mPassword, mFilter};
                         App.saveObject(getApplicationContext().getCacheDir(), getString(R.string.filename_dsb_login), login);
                         return true;
                     } else {

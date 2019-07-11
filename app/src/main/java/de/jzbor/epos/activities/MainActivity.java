@@ -20,6 +20,7 @@ import de.jzbor.epos.App;
 import de.jzbor.epos.NavListener;
 import de.jzbor.epos.R;
 import de.jzbor.epos.data.Schedule;
+import de.jzbor.epos.data.dsb.DSBParser;
 import de.jzbor.epos.data.dsb.DSBProvider;
 import de.jzbor.epos.data.elternportal.ElternPortal;
 import de.jzbor.epos.fragments.SubstitutionFragment;
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity
             ElternPortal.getInstance().login(epLogin[0], epLogin[1], epLogin[2]);
             String[] dsbLogin = (String[]) App.openObject(getApplicationContext().getCacheDir(), getString(R.string.filename_dsb_login));
             DSBProvider.login(dsbLogin[0], dsbLogin[1]);
+            DSBParser.setFilter(dsbLogin[2]);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
