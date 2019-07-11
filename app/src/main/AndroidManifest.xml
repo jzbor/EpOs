@@ -45,8 +45,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login"
+            android:name=".activities.EPLoginActivity"
+            android:label="@string/title_activity_ep_login"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.jzbor.epos.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.DSBLoginActivity"
+            android:label="@string/title_activity_dsb_login"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

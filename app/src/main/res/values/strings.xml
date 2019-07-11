@@ -18,9 +18,9 @@
     <string name="tab_text_4">THU</string>
     <string name="tab_text_5">FRI</string>
     <string name="title_activity_schedule">Schedule</string>
-    <string name="nav_login">Login</string>
+    <string name="nav_ep_login">Login</string>
     <string name="nav_dev">Dev</string>
-    <string name="title_activity_login">Login</string>
+    <string name="title_activity_ep_login">EP Login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -47,7 +47,7 @@
     <!--<string name="filename_subplan_0">subcache0.sd</string>-->
     <string name="filename_subplan_1">subcache1.sd</string>
     <string name="filename_schedule">sccache.sc</string>
-    <string name="filename_login">login.sa</string>
+    <string name="filename_ep_login">ep_login.sa</string>
     <string name="filename_subplan">subplan.sp</string>
     <string name="title_activity_info">Informations</string>
     <string name="nav_info">Info (Alpha only)</string>
@@ -64,4 +64,8 @@
     <string name="title_activity_to_do">ToDos</string>
     <string name="nav_todo">ToDos</string>
     <string name="filename_notifications">notifications.nt</string>
+    <string name="prompt_user">User</string>
+    <string name="nav_dsb_login">DSB Login</string>
+    <string name="filename_dsb_login">dsb_login.sa</string>
+    <string name="title_activity_dsb_login">DSB Login</string>
 </resources>

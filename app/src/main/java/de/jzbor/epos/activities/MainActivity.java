@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity
 
         // Login "ElternPortal" api
         try {
-            String[] login = (String[]) App.openObject(getApplicationContext().getCacheDir(), getString(R.string.filename_login));
+            String[] login = (String[]) App.openObject(getApplicationContext().getCacheDir(), getString(R.string.filename_ep_login));
             ElternPortal.getInstance().login(login[0], login[1], login[2]);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

@@ -25,9 +25,13 @@
             android:icon="@drawable/ic_menu_todo"
             android:title="@string/nav_todo" />
         <item
-            android:id="@+id/nav_login"
+            android:id="@+id/nav_ep_login"
             android:icon="@drawable/ic_menu_login"
-            android:title="@string/nav_login" />
+            android:title="@string/nav_ep_login" />
+        <item
+            android:id="@+id/nav_dsb_login"
+            android:icon="@drawable/ic_menu_login"
+            android:title="@string/nav_dsb_login" />
         <item
             android:id="@+id/nav_info"
             android:icon="@drawable/ic_menu_info"

@@ -41,9 +41,9 @@ import de.jzbor.epos.data.elternportal.ElternPortal;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class EPLoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "EPLoginActivity";
     private UserLoginTask mAuthTask = null;
     // UI references.
     private AppCompatEditText mEmailView;
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_ep_login);
         setupActionBar();
 
         mEmailView = findViewById(R.id.email);
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Load past details if available
         try {
-            String[] login = (String[]) App.openObject(getApplicationContext().getCacheDir(), getString(R.string.filename_login));
+            String[] login = (String[]) App.openObject(getApplicationContext().getCacheDir(), getString(R.string.filename_ep_login));
             if (login.length >= 3) {
                 mEmailView.setText(login[0]);
                 mPasswordView.setText(login[1]);
@@ -251,9 +251,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static class Toaster extends Handler {
         private static final int MSG_CODE = 0;
-        private LoginActivity activity;
+        private EPLoginActivity activity;
 
-        public Toaster(LoginActivity activity) {
+        public Toaster(EPLoginActivity activity) {
             this.activity = activity;
         }
 
@@ -309,7 +309,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     if (ElternPortal.checkLogin(mEmail, mPassword, mSchool)) {
                         ElternPortal.getInstance().login(mEmail, mPassword, mSchool);
                         String[] login = {mEmail, mPassword, mSchool};
-                        App.saveObject(getApplicationContext().getCacheDir(), getString(R.string.filename_login), login);
+                        App.saveObject(getApplicationContext().getCacheDir(), getString(R.string.filename_ep_login), login);
                         return true;
                     } else {
                         // Abort on failure
