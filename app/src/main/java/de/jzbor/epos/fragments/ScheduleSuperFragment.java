@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
+import de.jzbor.epos.data.DataProvider;
+import de.jzbor.epos.data.ProviderManager;
 import de.jzbor.epos.data.Schedule;
+import de.jzbor.epos.data.dsb.DSBProvider;
 import de.jzbor.epos.data.elternportal.EPProvider;
 import de.jzbor.epos.data.elternportal.ElternPortal;
 import de.jzbor.epos.threading.UniHandler;
@@ -95,9 +99,11 @@ public class ScheduleSuperFragment extends UpdatableFragment {
         // Start update thread
         ((MainActivity) getActivity()).setLoadingIcon(true);
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
-        ConnectivityManager cm = (ConnectivityManager) this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        new EPProvider(cm).requestSchedule(handler);
-        ((MainActivity) getActivity()).setRefreshing(false);
+        if (ProviderManager.inetReady((ConnectivityManager)
+                Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))))
+            ;
+        DataProvider provider = ProviderManager.getProvider(ProviderManager.SUBPLAN, new DSBProvider(), new EPProvider());
+        provider.requestSubplan(handler);
     }
 
 

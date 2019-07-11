@@ -1,15 +1,24 @@
 package de.jzbor.epos.data;
 
 public interface DataProvider {
+    ;
 
-    public static final boolean PROVIDES_SUBPLAN = false;
-    public static final boolean PROVIDES_SCHEDULE = false;
-    public static final boolean PROVIDES_CALENDAR = false;
-    public static final boolean PROVIDES_NOTIFICATIONS = false;
+    int requestSubplan(DataHandler handler);
 
-    public int requestSubplan(DataHandler handler);
-    public int requestSchedule(DataHandler handler);
-    public int requestCalendar(DataHandler handler);
-    public int requestNotifications(DataHandler handler);
+    int requestSchedule(DataHandler handler);
+
+    int requestCalendar(DataHandler handler);
+
+    int requestNotifications(DataHandler handler);
+
+    boolean available();
+
+    boolean providesSubplan();
+
+    boolean providesSchedule();
+
+    boolean providesCalendar();
+
+    boolean providesNotifications();
 
 }

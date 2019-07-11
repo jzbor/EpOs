@@ -5,17 +5,25 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
+import de.jzbor.epos.data.DataProvider;
+import de.jzbor.epos.data.ProviderManager;
 import de.jzbor.epos.data.Subplan;
+import de.jzbor.epos.data.dsb.DSBProvider;
 import de.jzbor.epos.data.elternportal.EPProvider;
 import de.jzbor.epos.fragments.subplan.SubplanListFragment;
 import de.jzbor.epos.threading.UniHandler;
+
+import static de.jzbor.epos.activities.MainActivity.TAG;
 
 public class SubstitutionFragment extends UpdatableFragment {
 
@@ -64,10 +72,13 @@ public class SubstitutionFragment extends UpdatableFragment {
     public void doUpdate() {
         // Start update thread
         ((MainActivity) getActivity()).setLoadingIcon(true);
+        Log.d(TAG, "doUpdate: Refreshing false");
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
-        ConnectivityManager cm = (ConnectivityManager) this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        new EPProvider(cm).requestSubplan(handler);
-        ((MainActivity) getActivity()).setRefreshing(false);
+        if (ProviderManager.inetReady((ConnectivityManager)
+                Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))))
+            ;
+        DataProvider provider = ProviderManager.getProvider(ProviderManager.SUBPLAN, new DSBProvider(), new EPProvider());
+        provider.requestSubplan(handler);
     }
 
     public void setListFragment(SubplanListFragment subplanListFragment, int index) {

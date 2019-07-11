@@ -54,6 +54,7 @@ public class DSBParser {
         }
         String timestamp = "";
         String wholeText = document.text();
+        System.out.println(wholeText);
         timestamp = wholeText.substring(wholeText.indexOf("Stand"), wholeText.length() - 1);
         String[] tss = timestamp.split(" ");
         timestamp = tss[0] + " " + tss[1] + " " + tss[2];

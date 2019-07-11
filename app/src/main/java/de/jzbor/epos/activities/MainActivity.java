@@ -29,6 +29,7 @@ import de.jzbor.epos.threading.UniHandler;
 public class MainActivity extends AppCompatActivity
         implements SwipeRefreshLayout.OnRefreshListener {
 
+    public static final String TAG = "EpOs";
     private UpdatableFragment fragment;
     private SwipeRefreshLayout refreshLayout;
     private int loadingCount;
@@ -152,6 +153,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             // Show error message on missing login
             Toast.makeText(this, getString(R.string.error_missing_login), Toast.LENGTH_SHORT).show();
+            refreshLayout.setRefreshing(false);
         }
     }
 

@@ -9,16 +9,9 @@ import de.jzbor.epos.data.DataProvider;
 
 public class DSBProvider extends Thread implements DataProvider {
 
-    public static final boolean PROVIDES_SUBPLAN = true;
     private static String user, pswd, filter;
     private DataHandler handler;
     private int id;
-
-
-    private DSBProvider(int id, DataHandler handler) {
-        this.id = id;
-        this.handler = handler;
-    }
 
     public static synchronized void login(String user, String pswd) {
         DSBProvider.user = user;
@@ -43,11 +36,16 @@ public class DSBProvider extends Thread implements DataProvider {
     @Override
     public void run() {
         try {
+            if (!(loggedIn() && checkLogin(user, pswd))) {
+                handler.handle(DataHandler.ERROR_LOGIN, id, null);
+                return;
+            }
             String subplanId = DSBNetwork.requestSubplanId(user, pswd);
             String subinfo = DSBNetwork.requestSubplans(subplanId);
             Map<String, String> m = DSBParser.parseSubplanInfo(subinfo);
             String requestUrl = m.get(DSBParser.SUBPLAN_URL_KEY).replaceAll("\\\\", "");
             String subplanHTML = DSBNetwork.request(requestUrl);
+            System.out.println(subplanId + " - " + subinfo);
             Subplan subplan = DSBParser.parseSubplan(subplanHTML);
             handler.handle(DataHandler.RESPONSE_SUBPLAN, id, subplan);
         } catch (IOException e) {
@@ -62,9 +60,9 @@ public class DSBProvider extends Thread implements DataProvider {
 
     @Override
     public int requestSubplan(DataHandler handler) {
-        int id = UUID.randomUUID().hashCode();
-        DSBProvider provider = new DSBProvider(id, handler);
-        provider.start();
+        id = UUID.randomUUID().hashCode();
+        this.handler = handler;
+        super.start();
         return id;
     }
 
@@ -81,5 +79,30 @@ public class DSBProvider extends Thread implements DataProvider {
     @Override
     public int requestNotifications(DataHandler handler) {
         return 0;
+    }
+
+    @Override
+    public boolean available() {
+        return loggedIn();
+    }
+
+    @Override
+    public boolean providesSubplan() {
+        return true;
+    }
+
+    @Override
+    public boolean providesSchedule() {
+        return false;
+    }
+
+    @Override
+    public boolean providesCalendar() {
+        return false;
+    }
+
+    @Override
+    public boolean providesNotifications() {
+        return false;
     }
 }
