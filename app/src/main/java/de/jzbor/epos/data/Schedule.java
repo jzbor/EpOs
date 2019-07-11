@@ -18,11 +18,21 @@ public class Schedule implements Serializable {
     private static final long FORECAST_TIME = 5 * 60 * 1000; // (millis)
     private static int staticStartTime;
     private int startTime;
-    private String[][] days;
+    private String[][] days, origDays;
     private Map<String, String> classes;
+    private String[] additionalClasses = new String[0];
 
     public Schedule(String[][] days, Map<String, String> classes, int startTime) {
         this.days = days;
+
+        // Make copy of days for later filtering
+        this.origDays = new String[days.length][];
+        for (int i = 0; i < days.length; i++) {
+            origDays[i] = new String[days[i].length];
+            for (int j = 0; j < days[i].length; j++) {
+                origDays[i][j] = days[i][j];
+            }
+        }
         startTime = DEFAULT_START_TIME;
         this.classes = classes;
         this.startTime = startTime;
@@ -118,7 +128,10 @@ public class Schedule implements Serializable {
     }
 
     public String[] getDay(int i) {
-        Log.d(TAG, "getDay: " + i);
+        if (i == 3) {
+            Log.d(TAG, "getDay: 1803: " + days[i][5]);
+            Log.d(TAG, "getDay: 1803: " + additionalClasses.length);
+        }
         return days[i];
     }
 
@@ -144,15 +157,15 @@ public class Schedule implements Serializable {
         if (classes == null)
             return;
         // Iterate over days
-        for (int i = 0; i < days.length; i++) {
+        for (int i = 0; i < origDays.length; i++) {
             // Iterate over lessons
-            for (int j = 0; j < days[i].length; j++) {
+            for (int j = 0; j < origDays[i].length; j++) {
                 // Skip empty items
-                if (days[i][j].length() == 0)
+                if (origDays[i][j].length() == 0)
                     continue;
                 String str = "";
                 // Separate rooms from classes
-                String[] split = days[i][j].split(" ", 2);
+                String[] split = origDays[i][j].split(" ", 2);
                 // Separate classes
                 String[] tempClasses = split[0].split("/");
                 // Separate rooms
@@ -171,10 +184,22 @@ public class Schedule implements Serializable {
     public boolean inClasses(String c) {
         // Checks whether a certain class is contained in classes
         for (String e : classes.keySet()) {
-            if (e.toLowerCase().equals(c.toLowerCase()))
+            if (c.toLowerCase().equals(e.toLowerCase()))
+                return true;
+        }
+        for (String e : additionalClasses) {
+            if (c.toLowerCase().equals(e.toLowerCase()))
                 return true;
         }
         return false;
+    }
+
+    public String[] getAdditionalClasses() {
+        return additionalClasses;
+    }
+
+    public void setAdditionalClasses(String[] additionalClasses) {
+        this.additionalClasses = additionalClasses;
     }
 
     public String[][] getDays() {

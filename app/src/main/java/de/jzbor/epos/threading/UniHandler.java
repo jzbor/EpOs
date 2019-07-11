@@ -2,8 +2,10 @@ package de.jzbor.epos.threading;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 
 import de.jzbor.epos.App;
@@ -44,10 +46,21 @@ public class UniHandler extends Handler implements DataHandler {
             case RESPONSE_SCHEDULE: {
                 Schedule schedule = (Schedule) (msg.obj);
                 try {
+                    if (new File(activity.getCacheDir(), activity.getString(R.string.filename_schedule)).exists()) {
+                        Schedule oldSchedule = (Schedule) App.openObject(activity.getApplicationContext().getCacheDir(),
+                                activity.getString(R.string.filename_schedule));
+                        schedule.setAdditionalClasses(oldSchedule.getAdditionalClasses());
+                        Log.d(TAG, "handleMessage: 1806: " + schedule.getAdditionalClasses().length);
+                        schedule.filter();
+                    }
                     App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_schedule), schedule);
                     activity.onUpdateSucceeded();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    activity.onUpdateFailed();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    activity.onUpdateFailed();
                 }
                 Message recMsg = obtainMessage(UPDATE_NEXT_LESSON, schedule.nextLesson());
                 recMsg.sendToTarget();
@@ -60,6 +73,7 @@ public class UniHandler extends Handler implements DataHandler {
                     activity.onUpdateSucceeded();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    activity.onUpdateFailed();
                 }
                 break;
             }
@@ -70,6 +84,7 @@ public class UniHandler extends Handler implements DataHandler {
                     activity.onUpdateSucceeded();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    activity.onUpdateFailed();
                 }
                 break;
             }
@@ -80,6 +95,7 @@ public class UniHandler extends Handler implements DataHandler {
                     activity.onUpdateSucceeded();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    activity.onUpdateFailed();
                 }
                 break;
             }
@@ -88,6 +104,7 @@ public class UniHandler extends Handler implements DataHandler {
                     App.saveObject(activity.getCacheDir(), activity.getString(R.string.filename_personal), msg.obj);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    activity.onUpdateFailed();
                 }
                 break;
             }

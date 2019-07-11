@@ -19,7 +19,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/email_login_form"
+            android:id="@+id/linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -34,6 +34,8 @@
                 android:onClick="onClick"
                 android:text="@string/nav_ep_login"
                 android:textColor="@color/primaryTextColor"
+                android:textColorHint="@color/primaryDarkColor"
+                android:textColorLink="@color/primaryDarkColor"
                 android:textStyle="bold" />
 
             <Button
@@ -47,6 +49,32 @@
                 android:text="@string/nav_dsb_login"
                 android:textColor="@color/primaryTextColor"
                 android:textStyle="bold" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/substitutions0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/primaryColor" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/additional_classes_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/prompt_additional_classes"
+                    android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
     </ScrollView>

@@ -33,7 +33,7 @@ public class MyScheduleRecyclerViewAdapter extends RecyclerView.Adapter<MySchedu
         String lesson = schedule.getDay(day)[position];
         String[] properties = lesson.split(" ");
         if (properties.length < 2) {
-            new Exception("parsing error: " + lesson).printStackTrace();
+            new Exception("parsing error: (" + position + "):" + lesson).printStackTrace();
             // @TODO Error gets thrown at every free lesson
             holder.subject.setText("");
             holder.room.setText("");
