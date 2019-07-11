@@ -188,7 +188,7 @@ public class Schedule implements Serializable {
                 return true;
         }
         for (String e : additionalClasses) {
-            if (c.toLowerCase().equals(e.toLowerCase()))
+            if (c.toLowerCase().contains(e.toLowerCase())) // @TODO could be better
                 return true;
         }
         return false;
