@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
     // UI references.
     private AppCompatEditText mEmailView;
-    private AppCompatEditText mSchoolView;
     private AppCompatEditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -57,10 +56,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setupActionBar();
-
-        // Set up the login form.
-        mSchoolView = findViewById(R.id.school);
-        mSchoolView.setText(R.string.default_school);
 
         mEmailView = findViewById(R.id.email);
         mEmailView.requestFocus();
@@ -94,7 +89,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (login.length >= 3) {
                 mEmailView.setText(login[0]);
                 mPasswordView.setText(login[1]);
-                mSchoolView.setText(login[2]);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -122,14 +116,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         // Reset errors.
-        mSchoolView.setError(null);
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-        String school = mSchoolView.getText().toString();
+        String school = getResources().getString(R.string.default_school);
 
         boolean cancel = false;
         View focusView = null;
@@ -357,8 +350,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         break;
                     }
                     case 2: {
-                        mSchoolView.setError(getString(R.string.error_incorrect_school));
-                        mSchoolView.requestFocus();
+                        // Error if school is not available
                         break;
                     }
                     default: {
