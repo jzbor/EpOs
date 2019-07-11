@@ -35,4 +35,8 @@
     <string name="copied_to_clipboard">In Ablage kopiert</string>
     <string name="nav_calendar">Kalendar</string>
     <string name="nav_news">Schwarzes Brett</string>
+    <string name="appwidget_text">Nicht verfügbar</string>
+    <string name="app_name">HGV Oberstufe</string>
+    <string name="prompt_filter">Stufen Filter</string>
+    <string name="prompt_user">Nutzername</string>
 </resources>

@@ -11,46 +11,49 @@
         android:id="@+id/number"
         android:layout_width="40dp"
         android:layout_height="match_parent"
+        android:layout_weight=".15"
         android:text="@string/not_available_short"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="@dimen/item_text_big" />
 
     <TextView
         android:id="@+id/subject"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_weight=".15"
         android:paddingStart="5dp"
         android:text="@string/not_available_long"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="@dimen/item_text_big" />
 
     <TextView
         android:id="@+id/room"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight=".15"
         android:paddingStart="5dp"
         android:text="@string/not_available_short"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="@dimen/item_text_big" />
 
     <TextView
         android:id="@+id/teacher"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight=".15"
         android:paddingStart="5dp"
         android:text="@string/not_available_short"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="@dimen/item_text_big" />
 
     <TextView
         android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_weight=".40"
         android:paddingStart="5dp"
         android:text="@string/not_available_short"
-        android:textAlignment="center"
+        android:textAlignment="textEnd"
         android:textSize="@dimen/item_text_big" />
 
 </LinearLayout>
