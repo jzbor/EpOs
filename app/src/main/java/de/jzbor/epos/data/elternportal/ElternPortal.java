@@ -53,14 +53,15 @@ public class ElternPortal {
         contentConnection.setRequestProperty("Cookie", cookie);
         // Read out response
         InputStreamReader inputStreamReader = new InputStreamReader(contentConnection.getInputStream());
-        String str = "";
+        StringBuilder str = new StringBuilder();
         int data = 0;
         while (data != -1) {
             data = inputStreamReader.read();
-            str += (char) data;
+            if (data > 0)
+                str.append((char) data);
         }
         inputStreamReader.close();
-        return str;
+        return str.toString();
     }
 
     public static boolean checkLogin(String user, String pswd, String school) throws Exception {
