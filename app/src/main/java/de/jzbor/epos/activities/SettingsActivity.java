@@ -61,13 +61,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onPause() {
         super.onPause();
-        String[] sarr = ((EditText) findViewById(R.id.additional_classes_input)).getText().toString()
-                .replace(" ", "").split(",");
-        schedule.setAdditionalClasses(sarr);
-        try {
-            App.saveObject(getCacheDir(), getString(R.string.filename_schedule), schedule);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (schedule != null) {
+            String[] sarr = ((EditText) findViewById(R.id.additional_classes_input)).getText().toString()
+                    .replace(" ", "").split(",");
+            schedule.setAdditionalClasses(sarr);
+            try {
+                App.saveObject(getCacheDir(), getString(R.string.filename_schedule), schedule);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
