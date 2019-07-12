@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 
 import de.jzbor.epos.App;
@@ -82,11 +83,15 @@ public class MainActivity extends AppCompatActivity
 
         // Login "ElternPortal" api and dsb api
         try {
-            String[] epLogin = (String[]) App.openObject(getApplicationContext().getCacheDir(), getString(R.string.filename_ep_login));
-            ElternPortal.getInstance().login(epLogin[0], epLogin[1], epLogin[2]);
-            String[] dsbLogin = (String[]) App.openObject(getApplicationContext().getCacheDir(), getString(R.string.filename_dsb_login));
-            DSBProvider.login(dsbLogin[0], dsbLogin[1]);
-            DSBParser.setFilter(dsbLogin[2]);
+            if (new File(getCacheDir(), getString(R.string.filename_ep_login)).exists()) {
+                String[] epLogin = (String[]) App.openObject(getCacheDir(), getString(R.string.filename_ep_login));
+                ElternPortal.getInstance().login(epLogin[0], epLogin[1], epLogin[2]);
+            }
+            if (new File(getCacheDir(), getString(R.string.filename_dsb_login)).exists()) {
+                String[] dsbLogin = (String[]) App.openObject(getCacheDir(), getString(R.string.filename_dsb_login));
+                DSBProvider.login(dsbLogin[0], dsbLogin[1]);
+                DSBParser.setFilter(dsbLogin[2]);
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -151,7 +156,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRefresh() {
         // Update current fragment
-        if (ElternPortal.getInstance().loggedIn()) {
+        if (ElternPortal.getInstance().loggedIn() || DSBProvider.loggedIn()) {
             refreshLayout.setRefreshing(true);
             fragment.doUpdate();
             refreshLayout.setRefreshing(false);

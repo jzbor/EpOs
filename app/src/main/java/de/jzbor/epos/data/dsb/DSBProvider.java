@@ -55,7 +55,7 @@ public class DSBProvider extends Thread implements DataProvider {
         }
     }
 
-    public boolean loggedIn() {
+    public static boolean loggedIn() {
         return ((user != null) && (pswd != null));
     }
 
@@ -84,7 +84,7 @@ public class DSBProvider extends Thread implements DataProvider {
 
     @Override
     public boolean available() {
-        return loggedIn();
+        return DSBProvider.loggedIn();
     }
 
     @Override
