@@ -37,12 +37,12 @@ public class Calendar implements Serializable {
         return dates;
     }
 
-    public Map<String, String> getDatesAfter(Date date){
+    public Map<String, String> getDatesAfter(Date date) {
         Map<String, String> map = new TreeMap<>(new DateComparator());
         for (String key :
                 dates.keySet()) {
             Date compareDate = stringToDate(key);
-            if (compareDate != null && !compareDate.before(date)){
+            if (compareDate != null && !compareDate.before(date)) {
                 map.put(key, dates.get(key));
             }
         }

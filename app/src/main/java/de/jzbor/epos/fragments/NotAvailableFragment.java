@@ -22,6 +22,7 @@ public class NotAvailableFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_not_available, container, false);
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

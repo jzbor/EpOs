@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class Schedule implements Serializable {
 
+    public static final int DEFAULT_START_TIME = 7 * 60 + 55;
     // @TODO Replace with xml strings
     private static final String[] WORKING_DAYS = {"Mo", "Di", "Mi", "Do", "Fr"};
     private static final String TAG = "mySchedule";
-    public static final int DEFAULT_START_TIME = 7 * 60 + 55;
     private static final long FORECAST_TIME = 5 * 60 * 1000; // (millis)
     private static int staticStartTime;
     private int startTime;

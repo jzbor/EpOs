@@ -29,6 +29,10 @@ public class DSBProvider extends Thread implements DataProvider {
         DSBProvider.filter = filter;
     }
 
+    public static boolean loggedIn() {
+        return ((user != null) && (pswd != null));
+    }
+
     @Override
     public synchronized void start() {
         System.err.println("DBBProvider.start() should not be called from a public context!");
@@ -53,10 +57,6 @@ public class DSBProvider extends Thread implements DataProvider {
             e.printStackTrace();
             handler.handle(DataHandler.ERROR_CONNECTION, id, null);
         }
-    }
-
-    public static boolean loggedIn() {
-        return ((user != null) && (pswd != null));
     }
 
     @Override

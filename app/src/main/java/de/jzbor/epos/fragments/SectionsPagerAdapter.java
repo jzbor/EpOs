@@ -29,8 +29,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (schedule == null) {
             return new NotAvailableFragment();
-        }
-        else
+        } else
             return fragments[position];
     }
 

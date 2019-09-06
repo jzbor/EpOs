@@ -42,7 +42,7 @@ public class ScheduleListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule_list, container, false);
 
-        Log.d(TAG, "onCreateView: "+getArguments());
+        Log.d(TAG, "onCreateView: " + getArguments());
         if (!getArguments().isEmpty()) {
             schedule = (Schedule) getArguments().getSerializable(ARG_SCHEDULE);
             day = getArguments().getInt(ARG_DAY);
