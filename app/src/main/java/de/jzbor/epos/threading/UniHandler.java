@@ -145,7 +145,11 @@ public class UniHandler extends Handler implements DataHandler {
 
     @Override
     public void handle(int type, int id, Object object) {
-        System.out.println("Handle: " + type + " - " + id + " - " + object.getClass());
+        if (object != null) {
+            System.out.println("Handle: " + type + " - " + id + " - " + object.getClass());
+        } else {
+            System.out.println("Handle: " + type + " - " + id + " - Object is null object: " + object);
+        }
         Message msg = obtainMessage(type, object);
         msg.sendToTarget();
     }

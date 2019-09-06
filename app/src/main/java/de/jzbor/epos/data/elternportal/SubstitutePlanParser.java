@@ -35,6 +35,7 @@ public class SubstitutePlanParser {
     }
 
     public static SubstituteDay[] getSubstitutions(String html) throws ParserException {
+        System.out.println("\n\n\n1802: \n"+html+"\n\n\n");
         try {
             Document document = Jsoup.parse(html);
             // superdiv = div containing both tables

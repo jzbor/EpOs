@@ -32,10 +32,13 @@ public class MyScheduleRecyclerViewAdapter extends RecyclerView.Adapter<MySchedu
         // Create new ViewHolder
         String lesson = schedule.getDay(day)[position];
         String[] properties = lesson.split(" ");
-        if (properties.length < 2) {
+        if (lesson.length() == 0 && properties.length < 2) {
             new Exception("parsing error: (" + position + "):" + lesson).printStackTrace();
             // @TODO Error gets thrown at every free lesson
             holder.subject.setText("");
+            holder.room.setText("");
+        } else if (properties.length < 2) {
+            holder.subject.setText(String.format("? %s", lesson));
             holder.room.setText("");
         } else {
             holder.subject.setText(properties[0]);
