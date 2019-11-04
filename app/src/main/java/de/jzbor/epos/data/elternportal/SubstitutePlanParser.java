@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import de.jzbor.epos.data.SubstituteDay;
@@ -50,11 +51,16 @@ public class SubstitutePlanParser {
                 subDay0.add(EMPTY_SUBS);
             } else {
                 for (Element sub : subTables.get(0).child(0).children()) {
-                    String[] tempArr = new String[5];
+                    String[] tempArr = new String[sub.children().size()];
                     // Add cells as attributes
                     for (int j = 0; j < tempArr.length; j++) {
                         tempArr[j] = sub.children().get(j).text();
                     }
+                    // Hotfixes for shifted columns
+                    for (int j = 2; j < tempArr.length; j++) {
+                        tempArr[j-1] = tempArr[j];
+                    }
+                    tempArr = Arrays.copyOfRange(tempArr, 0, 5);
                     // Sort out declaration row
                     if (!tempArr[0].equals("Std."))
                         subDay0.add(tempArr);
@@ -67,11 +73,16 @@ public class SubstitutePlanParser {
                 subDay1.add(EMPTY_SUBS);
             } else {
                 for (Element sub : subTables.get(1).child(0).children()) {
-                    String[] tempArr = new String[5];
+                    String[] tempArr = new String[sub.children().size()];
                     // Add cells as attributes
                     for (int j = 0; j < tempArr.length; j++) {
                         tempArr[j] = sub.children().get(j).text();
                     }
+                    // Hotfixes for shifted columns
+                    for (int j = 2; j < tempArr.length; j++) {
+                        tempArr[j-1] = tempArr[j];
+                    }
+                    tempArr = Arrays.copyOfRange(tempArr, 0, 5);
                     // Sort out declaration row
                     if (!tempArr[0].equals("Std."))
                         subDay1.add(tempArr);
