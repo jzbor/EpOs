@@ -13,15 +13,16 @@ import android.widget.TextView;
 
 import java.util.Objects;
 
+import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.data.DataProvider;
-import de.jzbor.epos.data.ProviderManager;
-import de.jzbor.epos.data.Subplan;
-import de.jzbor.epos.data.dsb.DSBProvider;
-import de.jzbor.epos.data.elternportal.EPProvider;
 import de.jzbor.epos.fragments.subplan.SubplanListFragment;
 import de.jzbor.epos.threading.UniHandler;
+import de.jzbor.hgvinfo.DataProvider;
+import de.jzbor.hgvinfo.ProviderManager;
+import de.jzbor.hgvinfo.dsb.DSBProvider;
+import de.jzbor.hgvinfo.elternportal.EPProvider;
+import de.jzbor.hgvinfo.model.Subplan;
 
 import static de.jzbor.epos.activities.MainActivity.TAG;
 
@@ -74,7 +75,7 @@ public class SubstitutionFragment extends UpdatableFragment {
         ((MainActivity) getActivity()).setLoadingIcon(true);
         Log.d(TAG, "doUpdate: Refreshing false");
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
-        if (ProviderManager.inetReady((ConnectivityManager)
+        if (App.inetReady((ConnectivityManager)
                 Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))))
             ;
         DataProvider provider = ProviderManager.getProvider(ProviderManager.SUBPLAN, new DSBProvider(), new EPProvider());

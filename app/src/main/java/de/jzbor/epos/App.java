@@ -1,5 +1,8 @@
 package de.jzbor.epos;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,5 +33,10 @@ public class App {
         ois.close();
         fis.close();
         return object;
+    }
+
+    public static boolean inetReady(ConnectivityManager connectivityManager) {
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return !((networkInfo == null) || (!networkInfo.isConnectedOrConnecting()));
     }
 }

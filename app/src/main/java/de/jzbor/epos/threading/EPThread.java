@@ -4,13 +4,13 @@ import android.util.Log;
 
 import java.io.IOException;
 
-import de.jzbor.epos.data.DataHandler;
-import de.jzbor.epos.data.Schedule;
-import de.jzbor.epos.data.elternportal.EPParser;
-import de.jzbor.epos.data.elternportal.ElternPortal;
-import de.jzbor.epos.data.elternportal.ImplicitLoginException;
-import de.jzbor.epos.data.elternportal.ParserException;
-import de.jzbor.epos.data.elternportal.SubstitutePlanParser;
+import de.jzbor.hgvinfo.DataHandler;
+import de.jzbor.hgvinfo.elternportal.EPParser;
+import de.jzbor.hgvinfo.elternportal.ElternPortal;
+import de.jzbor.hgvinfo.elternportal.ImplicitLoginException;
+import de.jzbor.hgvinfo.elternportal.ParserException;
+import de.jzbor.hgvinfo.elternportal.SubstitutePlanParser;
+import de.jzbor.hgvinfo.model.Schedule;
 
 public class EPThread extends Thread {
 

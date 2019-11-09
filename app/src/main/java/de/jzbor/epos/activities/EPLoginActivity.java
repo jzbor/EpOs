@@ -36,7 +36,7 @@ import java.util.List;
 
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.elternportal.ElternPortal;
+import de.jzbor.hgvinfo.elternportal.ElternPortal;
 
 /**
  * A login screen that offers login via email/password.

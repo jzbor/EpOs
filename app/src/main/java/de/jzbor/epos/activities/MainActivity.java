@@ -20,14 +20,14 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.NavListener;
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.Schedule;
-import de.jzbor.epos.data.dsb.DSBParser;
-import de.jzbor.epos.data.dsb.DSBProvider;
-import de.jzbor.epos.data.elternportal.ElternPortal;
 import de.jzbor.epos.fragments.SubstitutionFragment;
 import de.jzbor.epos.fragments.UpdatableFragment;
 import de.jzbor.epos.threading.NextLessonThread;
 import de.jzbor.epos.threading.UniHandler;
+import de.jzbor.hgvinfo.dsb.DSBParser;
+import de.jzbor.hgvinfo.dsb.DSBProvider;
+import de.jzbor.hgvinfo.elternportal.ElternPortal;
+import de.jzbor.hgvinfo.model.Schedule;
 
 public class MainActivity extends AppCompatActivity
         implements SwipeRefreshLayout.OnRefreshListener {

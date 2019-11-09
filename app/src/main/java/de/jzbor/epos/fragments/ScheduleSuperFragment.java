@@ -17,13 +17,13 @@ import java.util.Objects;
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.data.DataProvider;
-import de.jzbor.epos.data.ProviderManager;
-import de.jzbor.epos.data.Schedule;
-import de.jzbor.epos.data.dsb.DSBProvider;
-import de.jzbor.epos.data.elternportal.EPProvider;
-import de.jzbor.epos.data.elternportal.ElternPortal;
 import de.jzbor.epos.threading.UniHandler;
+import de.jzbor.hgvinfo.DataProvider;
+import de.jzbor.hgvinfo.ProviderManager;
+import de.jzbor.hgvinfo.dsb.DSBProvider;
+import de.jzbor.hgvinfo.elternportal.EPProvider;
+import de.jzbor.hgvinfo.elternportal.ElternPortal;
+import de.jzbor.hgvinfo.model.Schedule;
 
 public class ScheduleSuperFragment extends UpdatableFragment {
     private static final String TAG = "ScheduleSuperFragment";
@@ -99,7 +99,7 @@ public class ScheduleSuperFragment extends UpdatableFragment {
         // Start update thread
         ((MainActivity) getActivity()).setLoadingIcon(true);
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
-        if (ProviderManager.inetReady((ConnectivityManager)
+        if (App.inetReady((ConnectivityManager)
                 Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))))
             ;
         DataProvider provider = ProviderManager.getProvider(ProviderManager.SCHEDULE, new DSBProvider(), new EPProvider());

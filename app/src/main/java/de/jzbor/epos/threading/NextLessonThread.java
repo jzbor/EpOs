@@ -9,7 +9,7 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.data.Schedule;
+import de.jzbor.hgvinfo.model.Schedule;
 
 public class NextLessonThread extends Thread {
 

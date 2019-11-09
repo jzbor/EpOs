@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.Schedule;
+import de.jzbor.hgvinfo.model.Schedule;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
     // @TODO Save additional classes w/o schedule (if ep login is missing)

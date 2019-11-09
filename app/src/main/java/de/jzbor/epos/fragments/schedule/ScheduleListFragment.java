@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.Schedule;
+import de.jzbor.hgvinfo.model.Schedule;
 
 public class ScheduleListFragment extends Fragment {
 

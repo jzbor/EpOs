@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.RecyclerView;
 
-import de.jzbor.epos.data.Schedule;
 import de.jzbor.epos.fragments.schedule.ScheduleListFragment;
+import de.jzbor.hgvinfo.model.Schedule;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final String TAG = "SectionsPagerAdapter";

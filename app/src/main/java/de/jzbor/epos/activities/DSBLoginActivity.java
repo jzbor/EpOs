@@ -34,8 +34,8 @@ import java.util.List;
 
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
-import de.jzbor.epos.data.dsb.DSBParser;
-import de.jzbor.epos.data.dsb.DSBProvider;
+import de.jzbor.hgvinfo.dsb.DSBParser;
+import de.jzbor.hgvinfo.dsb.DSBProvider;
 
 /**
  * A login screen that offers login via email/password.

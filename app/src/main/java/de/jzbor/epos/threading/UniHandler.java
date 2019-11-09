@@ -11,11 +11,11 @@ import java.io.IOException;
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.data.Calendar;
-import de.jzbor.epos.data.DataHandler;
-import de.jzbor.epos.data.Notifications;
-import de.jzbor.epos.data.Schedule;
-import de.jzbor.epos.data.Subplan;
+import de.jzbor.hgvinfo.DataHandler;
+import de.jzbor.hgvinfo.model.Calendar;
+import de.jzbor.hgvinfo.model.Notifications;
+import de.jzbor.hgvinfo.model.Schedule;
+import de.jzbor.hgvinfo.model.Subplan;
 
 public class UniHandler extends Handler implements DataHandler {
 

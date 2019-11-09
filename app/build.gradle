@@ -41,5 +41,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation files('src/main/java/jsoup-1.11.2.jar')
+    //Implementation files('src/main/java/jsoup-1.11.2.jar')
+    implementation files('src/main/java/HGV_Info.jar')
 }
