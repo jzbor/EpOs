@@ -16,6 +16,8 @@ import java.io.Reader;
 import java.io.Serializable;
 
 public class App {
+    public static final String TAG = "EpOs";
+
     public static void saveObject(File dir, String filename, Object object) throws IOException {
         // Save a serializable object
         if (!(object instanceof Serializable))

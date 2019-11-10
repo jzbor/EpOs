@@ -47,21 +47,30 @@ public class UniHandler extends Handler implements DataHandler {
                 Schedule schedule = (Schedule) (msg.obj);
                 try {
                     if (new File(activity.getCacheDir(), activity.getString(R.string.filename_schedule)).exists()) {
-                        Schedule oldSchedule = (Schedule) App.openObject(activity.getApplicationContext().getCacheDir(),
-                                activity.getString(R.string.filename_schedule));
-                        schedule.setAdditionalClasses(oldSchedule.getAdditionalClasses());
-                        Log.d(TAG, "handleMessage: 1806: " + schedule.getAdditionalClasses().length);
-                        schedule.filter();
+                        try {
+                            Schedule oldSchedule = (Schedule) App.openObject(activity.getApplicationContext().getCacheDir(),
+                                    activity.getString(R.string.filename_schedule));
+                            schedule.setAdditionalClasses(oldSchedule.getAdditionalClasses());
+                            Log.d(TAG, "handleMessage: 1806: " + schedule.getAdditionalClasses().length);
+                            schedule.filter();
+                        } catch (ClassNotFoundException e) {
+                            // This is necessary to avoid problems with old versions of the serialized schedule
+                            Log.e(App.TAG, "Apparently the serialized schedule object was" +
+                                    " created by an older version of the app");
+                            e.printStackTrace();
+                        }
                     }
                     App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_schedule), schedule);
                     activity.onUpdateSucceeded();
                 } catch (IOException e) {
                     e.printStackTrace();
                     activity.onUpdateFailed();
-                } catch (ClassNotFoundException e) {
+                } /* Unnecessary due to catch phrase above
+                        @TODO Decide whether this catch statement still serves a purpose
+                catch (ClassNotFoundException e) {
                     e.printStackTrace();
                     activity.onUpdateFailed();
-                }
+                } */
                 Message recMsg = obtainMessage(UPDATE_NEXT_LESSON, schedule.nextLesson());
                 recMsg.sendToTarget();
                 break;
