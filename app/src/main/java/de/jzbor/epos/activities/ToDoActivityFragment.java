@@ -32,8 +32,8 @@ public class ToDoActivityFragment extends Fragment {
 
         String text;
         try {
-            text = (String) App.openObject(getContext().getCacheDir(), "todo.str");
-        } catch (IOException | ClassNotFoundException e) {
+            text = App.openText(getContext().getCacheDir(), "todo.txt");
+        } catch (IOException e) {
             e.printStackTrace();
             text = "";
         }
@@ -46,7 +46,7 @@ public class ToDoActivityFragment extends Fragment {
 
         String text = ((EditText) getView().findViewById(R.id.editorField)).getText().toString();
         try {
-            App.saveObject(getContext().getCacheDir(), "todo.str", text);
+            App.saveText(getContext().getCacheDir(), "todo.txt", text);
         } catch (IOException e) {
             e.printStackTrace();
         }
