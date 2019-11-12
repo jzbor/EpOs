@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InvalidClassException;
 
 import de.jzbor.epos.App;
 import de.jzbor.epos.R;
@@ -40,6 +41,8 @@ public class UniHandler extends Handler implements DataHandler {
                         activity.getString(R.string.filename_subplan));
                 if (saved)
                     activity.onUpdateSucceeded();
+                else
+                    activity.onUpdateFailed();
                 // Missing else? onUpdateFailure?
                 break;
             }
@@ -51,26 +54,20 @@ public class UniHandler extends Handler implements DataHandler {
                             Schedule oldSchedule = (Schedule) App.openObject(activity.getApplicationContext().getCacheDir(),
                                     activity.getString(R.string.filename_schedule));
                             schedule.setAdditionalClasses(oldSchedule.getAdditionalClasses());
-                            Log.d(TAG, "handleMessage: 1806: " + schedule.getAdditionalClasses().length);
-                            schedule.filter();
-                        } catch (ClassNotFoundException e) {
+                        } catch (InvalidClassException e) {
                             // This is necessary to avoid problems with old versions of the serialized schedule
                             Log.e(App.TAG, "Apparently the serialized schedule object was" +
                                     " created by an older version of the app");
                             e.printStackTrace();
                         }
                     }
+                    //schedule.filter();
                     App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_schedule), schedule);
                     activity.onUpdateSucceeded();
-                } catch (IOException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                     activity.onUpdateFailed();
-                } /* Unnecessary due to catch phrase above
-                        @TODO Decide whether this catch statement still serves a purpose
-                catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                    activity.onUpdateFailed();
-                } */
+                }
                 Message recMsg = obtainMessage(UPDATE_NEXT_LESSON, schedule.nextLesson());
                 recMsg.sendToTarget();
                 break;
