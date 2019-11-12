@@ -66,4 +66,5 @@
     <string name="title_activity_dsb_login">DSB Login</string>
     <string name="prompt_filter">Class filter</string>
     <string name="prompt_additional_classes">Additional Classes</string>
+    <string name="filename_news">news.nws</string>
 </resources>
