@@ -22,7 +22,6 @@ import de.jzbor.hgvinfo.DataProvider;
 import de.jzbor.hgvinfo.ProviderManager;
 import de.jzbor.hgvinfo.dsb.DSBProvider;
 import de.jzbor.hgvinfo.elternportal.EPProvider;
-import de.jzbor.hgvinfo.model.Calendar;
 import de.jzbor.hgvinfo.model.Notifications;
 
 public class NewsListFragment extends UpdatableFragment {
@@ -101,7 +100,7 @@ public class NewsListFragment extends UpdatableFragment {
         if (App.inetReady((ConnectivityManager)
                 Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))));
         DataProvider provider = ProviderManager.getProvider(ProviderManager.NOTIFICATIONS, new DSBProvider(), new EPProvider());
-        provider.requestCalendar(handler);
+        provider.requestNotifications(handler);
     }
 
     @Override

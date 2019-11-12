@@ -100,7 +100,7 @@ public class UniHandler extends Handler implements DataHandler {
             case RESPONSE_NOTIFICATIONS: {
                 Notifications notifications = (Notifications) (msg.obj);
                 try {
-                    App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_notifications), notifications);
+                    App.saveObject(activity.getApplicationContext().getCacheDir(), activity.getString(R.string.filename_news), notifications);
                     activity.onUpdateSucceeded();
                 } catch (IOException e) {
                     e.printStackTrace();

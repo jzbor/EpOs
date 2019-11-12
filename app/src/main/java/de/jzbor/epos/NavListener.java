@@ -14,6 +14,7 @@ import de.jzbor.epos.activities.ToDoActivity;
 import de.jzbor.epos.fragments.ScheduleSuperFragment;
 import de.jzbor.epos.fragments.SubstitutionFragment;
 import de.jzbor.epos.fragments.calendar.DatesListFragment;
+import de.jzbor.epos.fragments.news.NewsListFragment;
 
 public class NavListener implements NavigationView.OnNavigationItemSelectedListener {
     private static final NavListener ourInstance = new NavListener();
@@ -45,6 +46,8 @@ public class NavListener implements NavigationView.OnNavigationItemSelectedListe
             activity.replaceFragment(new SubstitutionFragment());
         } else if (id == R.id.nav_schedule) {
             activity.replaceFragment(new ScheduleSuperFragment());
+        } else if (id == R.id.nav_news) {
+            activity.replaceFragment(new NewsListFragment());
         } else if (id == R.id.nav_calendar) {
             activity.replaceFragment(new DatesListFragment());
         } else if (id == R.id.nav_todo) {

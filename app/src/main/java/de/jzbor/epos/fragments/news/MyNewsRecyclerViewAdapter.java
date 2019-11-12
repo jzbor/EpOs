@@ -6,10 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.Date;
 
 import de.jzbor.epos.R;
-import de.jzbor.hgvinfo.model.Calendar;
 import de.jzbor.hgvinfo.model.Notifications;
 
 public class MyNewsRecyclerViewAdapter extends RecyclerView.Adapter<MyNewsRecyclerViewAdapter.ViewHolder> {
