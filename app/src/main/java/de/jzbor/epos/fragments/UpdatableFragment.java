@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentActivity;
 import java.io.IOException;
 
 public abstract class UpdatableFragment extends Fragment {
-    protected int navId = 0;
     private FragmentActivity activity;
 
     public abstract void doUpdate();
@@ -21,8 +20,5 @@ public abstract class UpdatableFragment extends Fragment {
         activity = getActivity();
     }
 
-    // @TODO wtf is navId
-    public int getNavId() {
-        return navId;
-    }
+    public abstract int getNavId();
 }

@@ -38,7 +38,11 @@ public class ScheduleSuperFragment extends UpdatableFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        navId = R.id.nav_schedule;
+    }
+
+    @Override
+    public int getNavId() {
+        return R.id.nav_schedule;
     }
 
     @Nullable

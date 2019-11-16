@@ -39,7 +39,11 @@ public class SubstitutionFragment extends UpdatableFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        navId = R.id.nav_substitutions;
+    }
+
+    @Override
+    public int getNavId() {
+        return R.id.nav_substitutions;
     }
 
     @Override

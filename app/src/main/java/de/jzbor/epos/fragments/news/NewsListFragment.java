@@ -113,6 +113,11 @@ public class NewsListFragment extends UpdatableFragment {
         System.out.println("\tEnd load cache");
     }
 
+    @Override
+    public int getNavId() {
+        return R.id.nav_news;
+    }
+
     /**
      * LayoutManager to suppress scrolling features
      */

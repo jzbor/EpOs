@@ -113,6 +113,11 @@ public class DatesListFragment extends UpdatableFragment {
         System.out.println("\tEnd load cache");
     }
 
+    @Override
+    public int getNavId() {
+        return R.id.nav_calendar;
+    }
+
     /**
      * LayoutManager to suppress scrolling features
      */
