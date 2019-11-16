@@ -1,4 +1,4 @@
-package de.jzbor.epos.fragments.calendar;
+package de.jzbor.epos.fragments;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -16,7 +16,6 @@ import java.util.Objects;
 
 import de.jzbor.epos.App;
 import de.jzbor.epos.activities.MainActivity;
-import de.jzbor.epos.fragments.UpdatableFragment;
 import de.jzbor.epos.threading.UniHandler;
 import de.jzbor.hgvinfo.DataProvider;
 import de.jzbor.hgvinfo.ProviderManager;
