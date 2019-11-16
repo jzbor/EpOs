@@ -5,7 +5,7 @@ App that serves you with a schedule and other infos provided by a certain intern
 ## Installation
 
 * Current stable version: 0.9.0
-* Download: [app.zip](https://github.com/jzbor/EpOs/suites/314437622/artifacts/342266)
+* Download: app.zip
 
 ### Requirements:
 * Minimum Android SDK version: 22
