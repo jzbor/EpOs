@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import de.jzbor.epos.R;
 import de.jzbor.hgvinfo.model.Notifications;
 

@@ -98,7 +98,8 @@ public class NewsListFragment extends UpdatableFragment {
         ((MainActivity) getActivity()).setLoadingIcon(true);
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
         if (App.inetReady((ConnectivityManager)
-                Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))));
+                Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))))
+            ;
         DataProvider provider = ProviderManager.getProvider(ProviderManager.NOTIFICATIONS, new DSBProvider(), new EPProvider());
         provider.requestNotifications(handler);
     }
