@@ -74,10 +74,10 @@ public class SubstitutionFragment extends UpdatableFragment {
     }
 
     @Override
-    public void doUpdate() {
+    public void triggerUpdate() {
         // Start update thread
         ((MainActivity) getActivity()).setLoadingIcon(true);
-        Log.d(TAG, "doUpdate: Refreshing false");
+        Log.d(TAG, "triggerUpdate: Refreshing false");
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
         if (App.inetReady((ConnectivityManager)
                 Objects.requireNonNull(this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE))))

@@ -10,7 +10,7 @@ import java.io.IOException;
 public abstract class UpdatableFragment extends Fragment {
     private FragmentActivity activity;
 
-    public abstract void doUpdate();
+    public abstract void triggerUpdate();
 
     public abstract void loadCache() throws IOException, ClassNotFoundException;
 

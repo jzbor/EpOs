@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity
         // Update current fragment
         if (ElternPortal.getInstance().loggedIn() || DSBProvider.loggedIn()) {
             refreshLayout.setRefreshing(true);
-            fragment.doUpdate();
+            fragment.triggerUpdate();
             refreshLayout.setRefreshing(false);
         } else {
             // Show error message on missing login

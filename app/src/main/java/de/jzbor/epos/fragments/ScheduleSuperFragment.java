@@ -74,7 +74,7 @@ public class ScheduleSuperFragment extends UpdatableFragment {
             loadCache();
         } catch (IOException | ClassNotFoundException e) {
             if (ElternPortal.getInstance().loggedIn()) {
-                doUpdate();
+                triggerUpdate();
             } else {
                 Toast.makeText(this.getContext(), getString(R.string.error_missing_login), Toast.LENGTH_SHORT).show();
             }
@@ -99,7 +99,7 @@ public class ScheduleSuperFragment extends UpdatableFragment {
     }
 
     @Override
-    public void doUpdate() {
+    public void triggerUpdate() {
         // Start update thread
         ((MainActivity) getActivity()).setLoadingIcon(true);
         UniHandler handler = new UniHandler(((MainActivity) this.getActivity()));
