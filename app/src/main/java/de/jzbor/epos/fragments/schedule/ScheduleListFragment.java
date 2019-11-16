@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import de.jzbor.epos.R;
-import de.jzbor.epos.fragments.calendar.ListFragment;
+import de.jzbor.epos.fragments.ListFragment;
 import de.jzbor.hgvinfo.ProviderManager;
 import de.jzbor.hgvinfo.model.Schedule;
 

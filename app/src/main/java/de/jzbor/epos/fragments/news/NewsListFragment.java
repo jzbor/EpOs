@@ -3,7 +3,7 @@ package de.jzbor.epos.fragments.news;
 import android.support.v7.widget.RecyclerView;
 
 import de.jzbor.epos.R;
-import de.jzbor.epos.fragments.calendar.ListFragment;
+import de.jzbor.epos.fragments.ListFragment;
 import de.jzbor.hgvinfo.ProviderManager;
 import de.jzbor.hgvinfo.model.Notifications;
 
