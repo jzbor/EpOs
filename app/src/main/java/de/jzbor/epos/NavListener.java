@@ -20,9 +20,17 @@ public class NavListener implements NavigationView.OnNavigationItemSelectedListe
     private static final NavListener ourInstance = new NavListener();
     private MainActivity activity;
     private DrawerLayout drawer;
+    private SubstitutionFragment substitutionFragment;
+    private ScheduleSuperFragment scheduleSuperFragment;
+    private NewsListFragment newsListFragment;
+    private DatesListFragment datesListFragment;
 
 
     private NavListener() {
+        substitutionFragment = new SubstitutionFragment();
+        scheduleSuperFragment = new ScheduleSuperFragment();
+        newsListFragment = new NewsListFragment();
+        datesListFragment = new DatesListFragment();
     }
 
     public static NavListener getInstance() {
@@ -43,13 +51,13 @@ public class NavListener implements NavigationView.OnNavigationItemSelectedListe
 
         // Replace fragment/activity
         if (id == R.id.nav_substitutions) {
-            activity.replaceFragment(new SubstitutionFragment());
+            activity.replaceFragment(substitutionFragment);
         } else if (id == R.id.nav_schedule) {
-            activity.replaceFragment(new ScheduleSuperFragment());
+            activity.replaceFragment(scheduleSuperFragment);
         } else if (id == R.id.nav_news) {
-            activity.replaceFragment(new NewsListFragment());
+            activity.replaceFragment(newsListFragment);
         } else if (id == R.id.nav_calendar) {
-            activity.replaceFragment(new DatesListFragment());
+            activity.replaceFragment(datesListFragment);
         } else if (id == R.id.nav_todo) {
             Intent i = new Intent(activity, ToDoActivity.class);
             activity.startActivity(i);
@@ -59,10 +67,7 @@ public class NavListener implements NavigationView.OnNavigationItemSelectedListe
         } else if (id == R.id.nav_info) {
             Intent i = new Intent(activity, InfoActivity.class);
             activity.startActivity(i);
-        } /* else if (id == R.id.nav_dev) {
-            Intent i = new Intent(activity, TestActivity.class);
-            activity.startActivity(i);
-        } */
+        }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
