@@ -67,15 +67,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.jzbor.epos.activities.MainActivity" />
         </activity>
-        <activity
-            android:name=".activities.TestActivity"
-            android:label="@string/title_activity_test"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.jzbor.epos.activities.MainActivity" />
-        </activity>
 
         <receiver android:name=".widgets.NextLessonWidget">
             <intent-filter>
