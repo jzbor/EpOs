@@ -2,7 +2,7 @@ name: Android Release
 
 on:
   tags:
-    -v0.*
+    - v0.*
 
 jobs:
   test:
